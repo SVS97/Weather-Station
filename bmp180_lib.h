@@ -17,11 +17,12 @@
 
 #define BMP180_R 0xEF
 #define BMP180_W 0xEE
-
+/* Calibration sensor */
 void BMP180_Calibration(int16_t BMP180_calibration_int16_t[],int16_t BMP180_calibration_uint16_t[], uint8_t* errorcode);
 uint16_t bmp180ReadShort(uint8_t address, uint8_t* errorcode);
 int32_t bmp180ReadTemp(uint8_t* error_code);
 int32_t bmp180ReadPressure(uint8_t* errorcode);
+/* Convert and displaying values */
 void bmp180Convert(int16_t BMP180_calibration_int16_t[],int16_t BMP180_calibration_uint16_t[],int32_t* temperature, int32_t* pressure, uint8_t* error_code);
 int32_t bmp180CalcAltitude(int32_t pressure);
 #endif

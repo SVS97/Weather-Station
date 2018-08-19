@@ -3,19 +3,20 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <util/delay.h>
-#define DHT11_BIT 4				/* Number of pin DHT11		*/
-#define DHT11_PORT PORTB			/* PORT DHT11			*/
-#define DHT11_DDR DDRB				/* PORT DDR DHT11		*/
-#define DHT11_PIN PINB
+#define DHT11_BIT 4					/* Number of pin DHT11		*/
+#define DHT11_PORT PORTB			/* PORT DHT11				*/
+#define DHT11_DDR DDRB				/* PORT DDR DHT11			*/
+#define DHT11_PIN PINB				/* Pin DHT11				*/
 
-/*Sending request to sensor*/
+/* Sending request to sensor */
 void Request11();
 
-/*Getting response from sensor*/
+/* Getting response from sensor */
 void Response11();
 
 /*Reading data from sensor*/
 uint8_t Receive_data11();
+
 /* Receiving and Calculating temperature and humidity 
  * @ temperature - temperature value transmitted by pointer
  * @ humidity - humidity value transmitted by pointer

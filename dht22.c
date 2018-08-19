@@ -2,16 +2,16 @@
 #include "dht22.h"
 #include <avr/interrupt.h>
 
-uint8_t c22=0;						/* temp */
+uint8_t c22=0;							/* temp */
 
 
 void Request22()						/* Sending start pulse/request	*/
 {
 	DHT22_DDR |= (1<<DHT22_BIT);
-	DHT22_PORT &= ~(1<<DHT22_BIT);				/* set to low pin		*/
-	_delay_ms(20);						/* wait for 20ms		*/
-	DHT22_PORT |= (1<<DHT22_BIT);				/* set to high pin		*/
-	_delay_us (30);						/* wait for 30us		*/
+	DHT22_PORT &= ~(1<<DHT22_BIT);		/* set to low pin				*/
+	_delay_ms(20);						/* wait for 20ms				*/
+	DHT22_PORT |= (1<<DHT22_BIT);		/* set to high pin				*/
+	_delay_us (30);						/* wait for 30us				*/
 }
 
 void Response22()						/* Receive response from DHT22	*/
@@ -34,7 +34,7 @@ void Response22()						/* Receive response from DHT22	*/
 	}
 }
 
-uint8_t Receive_data22()					/* Receive data 		*/
+uint8_t Receive_data22()					/* Receive data 			*/
 {	
 	DHT22_DDR &= ~(1<<DHT22_BIT);
 	DHT22_PORT &= ~(1<<DHT22_BIT);
@@ -49,10 +49,10 @@ uint8_t Receive_data22()					/* Receive data 		*/
 		if(DHT22_PIN & (1<<DHT22_BIT))
 		_delay_us(30);
 		if(DHT22_PIN & (1<<DHT22_BIT)){			/* if high pulse is greater than 30ms	*/
-			c22 = (c22<<1)|(0x01);			/* then its logic HIGH 			*/
+			c22 = (c22<<1)|(0x01);				/* then its logic HIGH 			*/
 		}else
 		{
-			c22 = (c22<<1);				/* otherwise its logic LOW 		*/
+			c22 = (c22<<1);						/* otherwise its logic LOW 		*/
 		}
 		for (wait = 70; wait > 0 ; wait--) {
 			_delay_us(1);
@@ -67,20 +67,20 @@ uint8_t Receive_data22()					/* Receive data 		*/
 void getdht22 (uint16_t *temperature22, uint16_t * humidity22)
 {
 	
-	uint8_t I_RH,D_RH,I_Temp,D_Temp,CheckSum;		/* temp					*/
+	uint8_t I_RH,D_RH,I_Temp,D_Temp,CheckSum;			/* temp								*/
 	
  
 	cli();
-	Request22();						/* send start pulse 			*/
-	Response22();						/* receive response 			*/
-	I_RH=Receive_data22();					/* store first eight bit in I_RH 	*/
-	D_RH=Receive_data22();					/* store next eight bit in D_RH 	*/
-	I_Temp=Receive_data22();				/* store next eight bit in I_Temp 	*/
-	D_Temp=Receive_data22();				/* store next eight bit in D_Temp 	*/
-	CheckSum=Receive_data22();				/* store next eight bit in CheckSum 	*/
+	Request22();										/* send start pulse 				*/
+	Response22();										/* receive response 				*/
+	I_RH=Receive_data22();								/* store first eight bit in I_RH 	*/
+	D_RH=Receive_data22();								/* store next eight bit in D_RH 	*/
+	I_Temp=Receive_data22();							/* store next eight bit in I_Temp 	*/
+	D_Temp=Receive_data22();							/* store next eight bit in D_Temp 	*/
+	CheckSum=Receive_data22();							/* store next eight bit in CheckSum */
 	sei();
-	*temperature22 = D_Temp * 0.1 + I_Temp * 25.6;		/* calculating temperature		*/
-	*humidity22 =  D_RH * 0.1 + I_RH * 25.6;			/* calculating humidity			*/
+	*temperature22 = D_Temp * 0.1 + I_Temp * 25.6;		/* calculating temperature			*/
+	*humidity22 =  D_RH * 0.1 + I_RH * 25.6;			/* calculating humidity				*/
 	
 	
 }

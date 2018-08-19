@@ -18,7 +18,7 @@ static void InPin(void);
 static void Strob(void);
 static uint8_t lcd_rus(uint8_t);
 
-//Таблица перекодировки в русские символы.
+//Table conversion to Russian characters
 static const unsigned char PROGMEM convert_HD44780[64] =
 {
 	0x41,0xA0,0x42,0xA1,0xE0,0x45,0xA3,0xA4,
@@ -31,21 +31,21 @@ static const unsigned char PROGMEM convert_HD44780[64] =
 	0xC1,0xE6,0xC2,0xC3,0xC4,0xC5,0xC6,0xC7
 };
 
-//Пользовательские функции для LCD, ими пользуемся в программе.
+//Custom functions for LCD, we use them in the program
 #if 1
-void LCDdata(uint8_t i)						//Отправка символа для отображения на дисплее.
+void LCDdata(uint8_t i)						//Sending a symbol for display
 {
-	Busy_flag();	//Проверим сперва флаг занятости, а свободен ли дисплей?
-	CPORT|=(1<<RS); //RS=1 посылаем данные в LCD
+	Busy_flag();	//Сheck first the employment flag
+	CPORT|=(1<<RS); //RS = 1 send data to the LCD
 	Send_byte(lcd_rus(i));
 	CPORT&=~(1<<RS);//RS=0
 }
-void LCDdataXY (uint8_t a, uint8_t b,uint8_t c)	//Вывести 1 символ на дисплей в X, Y позицию .
+void LCDdataXY (uint8_t a, uint8_t b,uint8_t c)	//Display 1 character in the display in the X, Y position
 {
 	LCDGotoXY(b,c);
 	LCDdata(a);
 }
-void LCDGotoXY(uint8_t x,uint8_t y)			//Устанавливаем курсор в X, Y позицию
+void LCDGotoXY(uint8_t x,uint8_t y)			//Set cursor to X, Y position
 {
 	 uint8_t Address;
 	
@@ -60,7 +60,7 @@ void LCDGotoXY(uint8_t x,uint8_t y)			//Устанавливаем курсор в X, Y позицию
 	
 	LCDcommand(1<<7 | Address);
 }
-void LCDstringXY(char *i,uint8_t x,uint8_t y) //Вывести строку на дисплей X,Y
+void LCDstringXY(char *i,uint8_t x,uint8_t y) //Display a line in the display X, Y
 {
 	LCDGotoXY(x,y);
 	while( *i )
@@ -68,7 +68,7 @@ void LCDstringXY(char *i,uint8_t x,uint8_t y) //Вывести строку на дисплей X,Y
 		LCDdata(*i++ );
 	}
 }
-void LCDsendString(char *s)//Вывести строку на дисплей.
+void LCDsendString(char *s)//Display the line in the display
 {
 	while( *s )
 	{
@@ -100,18 +100,18 @@ void LCDstring_of_flashXY(const uint8_t *FlashLoc,uint8_t x,uint8_t y)
 		LCDdata((uint8_t)pgm_read_byte(&FlashLoc[i]));
 	}
 }
-void LCDinit(void)							//Инициализируем дисплей
+void LCDinit(void)							//Initializing the display
 {
-	//Перед инициализацией LCD, надо в init задержку в 100 мсек сделать, чтоб питание устаканилось. 
+	//Before initializing the LCD, it is necessary to initiate a delay of 100 msec in the init, so that the power is set
 	_delay_ms(100);
-	CDDR |=  (1<<RS)|(1<<E)|(1<<RW);   //Настройка портов 
-	CPORT&=~((1<<RS)|(1<<E)|(1<<RW));  //Настройка портов 
-	OutPin();						   //Настройка портов
+	CDDR |=  (1<<RS)|(1<<E)|(1<<RW);   //Configuring Ports 
+	CPORT&=~((1<<RS)|(1<<E)|(1<<RW));  //Configuring Ports 
+	OutPin();						   //Configuring Ports
 	
 	uint8_t i=0;
 	while (i!=3)
 	{
-		#ifdef  LCD_8BIT       //отправка символа 0x30.
+		#ifdef  LCD_8BIT       //character sending 0x30
 		        DPORT|=(0<<DB7)|(0<<DB6)|(1<<DB5)|(1<<DB4)|(0<<DB3)|(0<<DB2)|(0<<DB1)|(0<<DB0);
 		#else
 				DPORT|=(0<<DB7)|(0<<DB6)|(1<<DB5)|(1<<DB4);
@@ -122,124 +122,124 @@ void LCDinit(void)							//Инициализируем дисплей
 		i++;
 	}
 	
-	//Разминочный этап закончен, далее переходим к основным упражнениям.
+	
 	
 	#ifdef  LCD_8BIT
-			LCDcommand(0b00111000);//8ми битный интерфейс, две строки, 5x8 точек.
-	#else   //Первый раз отправляем только пол старшей тетрады
+			LCDcommand(0b00111000);//8-bit interface, two lines, 5x8 pixels
+	#else   //The first time we send only the floor of the older tetrad
 			Busy_flag();
 			OutPin();
-			DPORT|=(0<<DB7)|(0<<DB6)|(1<<DB5)|(0<<DB4);//4х битный интерфейс 
+			DPORT|=(0<<DB7)|(0<<DB6)|(1<<DB5)|(0<<DB4);//4-bit interface
 			Strob();
-			LCDcommand(0b00101000);//Две строки, 5x8 точек.
+			LCDcommand(0b00101000);//Two lines, 5x8 points
 	#endif
 	
-	LCDcommand(0b1100);  //Включаем дисплей + без отображения курсоров.
-	LCDcommand(0b110);   //Счетчик адреса всегда будет смещаться на n+1
-	LCDcommand(0b10);    //курсор в позицию 0,0 + сброс всех сдвигов
-	LCDcommand(0b1);     //очистка дисплея 
-	//Основные упражнения закончены. Переходим к релаксации.
+	LCDcommand(0b1100);  //Turn on the display + without displaying the cursors
+	LCDcommand(0b110);   //The address counter will always shift to n + 1
+	LCDcommand(0b10);    //Cursor to position 0.0 + reset all shifts
+	LCDcommand(0b1);     //Cleaning the display
+	
 }
-void LCDblank(void)			//Сделать невидимой инфо на дисплее
+void LCDblank(void)			//Make invisible information on the display
 {
 	LCDcommand(0b1000);
 }
-void LCDnblank(void)		//Сделать видимой инфо на дисплее + отключить видимые курсоры.
+void LCDnblank(void)		//Make visible information in the display + turn off visible cursors
 {
 	LCDcommand(0b1100);
 }
-void LCDclear(void)			//Очистка дисплея + курсор на позицию 0,0
+void LCDclear(void)			//Clear the display + cursor to position 0.0
 {
 	LCDcommand(0b1);
 }
-void LCDcursor_bl(void)		//Включить мигающий курсор
+void LCDcursor_bl(void)		//Enable blinking cursor
 {
 	LCDcommand(0b1101);
 }
-void LCDcursor_on(void)		//Включить подчеркивающий курсор
+void LCDcursor_on(void)		//Enable underline cursor
 {
 	LCDcommand(0b1110);
 }
-void LCDcursor_vi(void)		//Включить оба курсора
+void LCDcursor_vi(void)		//Toggle both cursors
 {
 	LCDcommand(0b1111);
 }
-void LCDcursorOFF(void)		//Выключить курсор
+void LCDcursorOFF(void)		//Disable the cursor
 {
 	LCDcommand(0b1100);
 }
-void LCDacr(void)			//Cчетчик адреса всегда будет смещаться на n+1
+void LCDacr(void)			//The address counter will always shift to n + 1
 {
 	LCDcommand(0b110);
 }
-void LCDacl(void)			//Cчетчик адреса всегда будет смещаться на n-1
+void LCDacl(void)			//The address counter will always be shifted to n-1
 {
 	LCDcommand(0b100);
 }
-void LCDcursorl(void)		//Сместить курсор влево на 1
+void LCDcursorl(void)		//Move the cursor to the left by 1
 {
 	LCDcommand(0b10000);
 }
-void LCDcursorr(void)		//Сместить курсор вправо на 1
+void LCDcursorr(void)		//Move the cursor to the right by 1
 {
 	LCDcommand(0b10100);
 }
-void LCDcursorln(uint8_t n)	//Сместить курсор влево на n символов
+void LCDcursorln(uint8_t n)	//Move the cursor to the left with n symbols
 {
 	for (uint8_t i=0;i<n;i++)
 	{
 		LCDcommand(0b10000);
 	}
 }
-void LCDcursorrn(uint8_t n)	//Сместить курсор вправо на n символов
+void LCDcursorrn(uint8_t n)	//Move the cursor to the right by n characters
 {
 	for (uint8_t i=0;i<n;i++)
 	{
 		LCDcommand(0b10100);
 	}
 }
-void LCDscreenl(void)		//Сместить экран влево на 1
+void LCDscreenl(void)		//Move the screen to the left by 1
 {
 	LCDcommand(0b11000);
 }
-void LCDscreenr(void)		//Сместить экран вправо на 1
+void LCDscreenr(void)		//Move the screen to the right by 1
 {
 	LCDcommand(0b11100);
 }
-void LCDscreenln(uint8_t n)	//Сместить экран влево на n символов
+void LCDscreenln(uint8_t n)	//Move the screen to the left by n characters
 {
 	for (uint8_t i=0;i<n;i++)
 	{
 		LCDcommand(0b11000);
 	}
 }
-void LCDscreenrn(uint8_t n)	//Сместить экран вправо на n символов
+void LCDscreenrn(uint8_t n)	//Move the screen to the right by n characters
 {
 	for (uint8_t i=0;i<n;i++)
 	{
 		LCDcommand(0b11100);
 	}
 }
-void LCDscreenL(void)		//С каждым новым символом экран будет смещаться влево
+void LCDscreenL(void)		//With each new symbol, the screen will shift to the left
 {
 	LCDcommand(0b101);
 }
-void LCDscreenR(void)		//С каждым новым символом экран будет смещаться вправо
+void LCDscreenR(void)		//With each new symbol, the screen will shift to the right
 {
 	LCDcommand(0b111);
 }
-void LCDresshift(void)      //Установить курсор в позицию 0,0 + сброс всех сдвигов, изображение остается
+void LCDresshift(void)      //Set cursor to position 0.0 + reset all shifts, the image remains
 {
 	LCDcommand(0b10);
 }
 
-//Системные функции, их не трогаем, они для работы дисплея.
-static void LCDcommand(uint8_t i)	//Отправка команды, настройка дисплея.
+//System functions
+static void LCDcommand(uint8_t i)	//Sending commands, setting the display
 {
-	Busy_flag();	//Проверим сперва флаг занятости, а свободен ли дисплей?
+	Busy_flag();	
 	Send_byte(i);
 }
-static void Send_byte(uint8_t i)	//Передача данных LCD, вызывается функциями Send_command и Send_data.
+static void Send_byte(uint8_t i)	//The transmission of LCD data is called by the functions Send_command and Send_data
 {
 	OutPin();
 	
@@ -346,25 +346,25 @@ static void Send_byte(uint8_t i)	//Передача данных LCD, вызывается функциями Sen
 	
 	HiPin();
 }
-static void Busy_flag(void)		    //Проверка флага занятости
+static void Busy_flag(void)		    //Checking Busy flag
 {
 	InPin();
-	CPORT|=(1<<RW);	  //R/W=1 читаем из LCD
+	CPORT|=(1<<RW);	  //R / W = 1 is read from the LCD
 	
 	#ifdef  LCD_8BIT
 			uint8_t i=1;
 			while(i==1)
 			{
-				CPORT|=(1<<E);//Включили строб.
+				CPORT|=(1<<E);
 				asm("nop");
 				asm("nop");
 				
-				if (!(DPIN&(1<<DB7)))//Считали и проверили флаг занятости.
+				if (!(DPIN&(1<<DB7)))
 				{
 					i=0;
 				}
 				
-				CPORT&=~(1<<E);//Выключили строб.
+				CPORT&=~(1<<E);
 				asm("nop");
 				asm("nop");						
 			}
@@ -372,16 +372,16 @@ static void Busy_flag(void)		    //Проверка флага занятости
 			uint8_t i=1;
 			while(i==1)
 			{
-				CPORT|=(1<<E);//Включили строб.
+				CPORT|=(1<<E);
 				asm("nop");
 				asm("nop");
 		
-				if (!(DPIN&(1<<DB7)))//Считали и проверили флаг занятости.
+				if (!(DPIN&(1<<DB7)))
 				{
 					i=0;
 				}
 		
-				CPORT&=~(1<<E);//Выключили строб.
+				CPORT&=~(1<<E);
 				asm("nop");
 				asm("nop");
 				Strob();
@@ -393,7 +393,7 @@ static void Busy_flag(void)		    //Проверка флага занятости
 	
 	CPORT&=~(1<<RW);   //R/W=0 
 }
-static void HiPin(void)			    //Переводим порт в состояние Hi.
+static void HiPin(void)			    //Translate the port into the Hi state.
 {
 	#ifdef  LCD_8BIT
 			DDDR =0;
@@ -403,7 +403,7 @@ static void HiPin(void)			    //Переводим порт в состояние Hi.
 			DPORT&=~((1<<DB7)|(1<<DB6)|(1<<DB5)|(1<<DB4));
     #endif
 }
-static void OutPin(void)			//Переводим порт в состояние "выход".
+static void OutPin(void)			// Translate the port to the output state.
 {
 	#ifdef  LCD_8BIT
 			DDDR =0xFF;
@@ -413,7 +413,7 @@ static void OutPin(void)			//Переводим порт в состояние "выход".
 			DPORT&=~((1<<DB7)|(1<<DB6)|(1<<DB5)|(1<<DB4));
 	#endif
 }
-static void InPin(void)			    //Переводим порт в состояние "вход".
+static void InPin(void)			    //We translate the port to the input state
 {
 	#ifdef  LCD_8BIT
 			DDDR =0;
@@ -423,11 +423,11 @@ static void InPin(void)			    //Переводим порт в состояние "вход".
 			DPORT|=  (1<<DB7)|(1<<DB6)|(1<<DB5)|(1<<DB4);
 	#endif
 }
-static void Strob(void)             //Вкл/выкл строба Е
+static void Strob(void)             
 {
-	CPORT|=(1<<E);//Включили строб.
+	CPORT|=(1<<E);
 	_delay_us(1);
-	CPORT&=~(1<<E);//Выключили строб.
+	CPORT&=~(1<<E);
 }
 static uint8_t lcd_rus(uint8_t c)
 {
@@ -441,7 +441,7 @@ static uint8_t lcd_rus(uint8_t c)
 	return c;
 }
 /*
-static void LCDset(void)			//Двухстрочный дисплей 5x8 точек
+static void LCDset(void)			//Two-line display of 5x8 pixels
 {
 	LCDcommand(0b101000);
 }*/
@@ -464,7 +464,7 @@ void LCDstring_of_sram(uint8_t* data,uint8_t nBytes,uint8_t x, uint8_t y)
 }*/
 #endif
 
-/*БИБЛИОТЕКА ДЛЯ ПЕРЕВОДА ДВОИЧНЫХ ЧИСЕЛ В СИМВОЛЫ И ВЫВОДА ИХ НА ЖКД*/
+/* LIBRARY FOR TRANSFER OF BINARY NUMBERS TO SYMBOLS AND CONCLUSIONS ON THE LCD */
 #if 1
 #ifdef BCD_SYM
 #define BCD_SYMBOL  48

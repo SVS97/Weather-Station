@@ -1,19 +1,13 @@
 
-/* Автор:              Papandopala Papandopalavich
- * Имя файла:          Atmega16_LCD_LIB.c
- * Тип МК:			   Atmega16, Flash 16 Kbytes, SRAM 1 Kbytes, EEPROM 512 bytes.
- * Тактовая частота:   F_CPU 8000000 Гц
- * Дата:               28.06.2013 21:17:29
- * Версия ПО:          ATMEL STUDIO VERSION 6.1.2562
- * FUSES:              HIGH xx, LOW xx;
- * Описание:           Урезанная библиотека для работы с LCD дисплеями базирующимися на HD44780 
-					   контроллерах. Данная библиотека работает по 4х и 8ми битной схеме подключения
-					   LCD, поддерживает только вывод данных на дисплей*/
+/* Type of MCU:			Atmega16, Flash 16 Kbytes, SRAM 1 Kbytes, EEPROM 512 bytes.
+ * Description:         A trimmed library for working with LCD displays based on HD44780
+						controllers. This library operates on a 4-bit and 8-bit connection scheme
+						LCD, supports only display data*/
 
 #include <inttypes.h>
 
 //---------------------------------------------------------------------------------------------
-//Если  хочешь использовать 8ми битную схему подключения, тогда раскомментируй #define LCD_8BIT
+//If you want to use an 8-bit connection scheme, then uncomment #define LCD_8BIT
 //#define LCD_8BIT
 //---------------------------------------------------------------------------------------------
 
@@ -22,13 +16,13 @@
 
 #if 1
 
-//Указываем порт к которому подключены выводы дисплея LCD DB0...DB7.
+//Specify the port to which the LCD display DB0 ... DB7 terminals are connected.
 #define DPIN  PIND
 #define DDDR  DDRD
 #define DPORT PORTD	
 
-//цифрами указываем номера выводов мк подключенные к дисплею.						
-//Пины      МК  LCD   
+//In figures, we indicate the pin numbers m connected to the display.						
+//PIN	MCU		LCD   
 #define DB0	0// DB0
 #define DB1	1// DB1
 #define DB2	2// DB2	
@@ -36,109 +30,109 @@
 #define DB4	7// DB4  
 #define DB5	6// DB5
 #define DB6	5// DB6
-#define DB7	4// DB7 + BF флаг занятости дисплея.
+#define DB7	4// DB7 
 
-//Указываем порт к которому подключены выводы дисплея E, RS, R/W.
+//Specify the port to which the display pins E, RS, R / W are connected.
 #define CDDR  DDRB
 #define CPORT PORTB
 
-// Указываем номера пинов МК, к которым подключаем дисплей.
-#define E	0	// E	 СТРОБ.
-#define RW	2   // R/W   R/W=1 читаем из LCD, R/W=0 записываем в LCD.
-#define RS	1 	// RS	 RS=0 посылаем команду в LCD, RS=1 посылаем данные в LCD.
+// Specify the pin numbers of the MK to which the display is connected.
+#define E	0	// E	
+#define RW	2   // R/W		R / W = 1 is read from the LCD, R / W = 0 is written in the LCD.
+#define RS	1 	// RS		RS = 0 send the command to the LCD, RS = 1 send the data to the LCD.
 
 #endif
-//----------------------------------Настройки закончены---------------------------------
+//----------------------------------Settings complete---------------------------------
 #if 1
-//Пользовательские функции, ими пользуемся в программе.
+//Custom functions, which used in the program.
                    
-void LCDGotoXY(uint8_t,uint8_t);			             //Устанавливаем курсор в X, Y позицию
-void LCDdata(uint8_t);						             //Вывести 1 символ на дисплей.
-void LCDdataXY(uint8_t,uint8_t,uint8_t);	             //Вывести 1 символ на дисплей в X, Y позицию .
-void LCDsendString(char*);                             //Вывести строку на дисплей
-void LCDstringXY(char*,uint8_t,uint8_t);		             //Вывести строку на дисплей в позицию x,y
-void LCDstring_of_sramXY(uint8_t*,uint8_t,uint8_t);			 //Вывести строку на дисплей в позицию x,y из ОЗУ		
-void LCDstring_of_flashXY(const uint8_t*,uint8_t, uint8_t);//Вывести строку в позицию x,y из флеша
+void LCDGotoXY(uint8_t,uint8_t);								//Set cursor to X, Y position
+void LCDdata(uint8_t);											//Display 1 character 
+void LCDdataXY(uint8_t,uint8_t,uint8_t);						//Display 1 character in the display in the X, Y position
+void LCDsendString(char*);										//Display the string
+void LCDstringXY(char*,uint8_t,uint8_t);						//Display the string at position x, y
+void LCDstring_of_sramXY(uint8_t*,uint8_t,uint8_t);				//Display the string at position x, y from RAM		
+void LCDstring_of_flashXY(const uint8_t*,uint8_t, uint8_t);		//Display the string to the position x, y from the flash
 
-void LCDinit(void);							//Инициализация LCD  
-void LCDblank(void);			//Сделать невидимым инфо на дисплее
-void LCDnblank(void);			//Сделать видимой инфо на дисплее + отключение видимых курсоров.
-void LCDclear(void);			//Очистить дисплей от инфо + курсор на позицию 0,0
-void LCDcursor_bl(void);		//Включить мигающий курсор
-void LCDcursor_on(void);		//Включить подчеркивающий курсор
-void LCDcursor_vi(void);		//Включить оба курсора
-void LCDcursorOFF(void);		//Выключить курсор (любой)
-void LCDacr(void);				//Cчетчик адреса AC всегда будет смещаться на n+1
-void LCDacl(void);				//Cчетчик адреса AC всегда будет смещаться на n-1
-void LCDcursorl(void);			//Сместить курсор влево на 1 символ
-void LCDcursorr(void);			//Сместить курсор вправо на 1 символ
-void LCDcursorln(uint8_t);		//Сместить курсор влево на n символов
-void LCDcursorrn(uint8_t);		//Сместить курсор вправо на n символов
-void LCDscreenl(void);			//Сместить экран влево на 1 символ
-void LCDscreenr(void);			//Сместить экран вправо на 1 символ
-void LCDscreenln(uint8_t);		//Сместить экран влево на n символов
-void LCDscreenrn(uint8_t);		//Сместить экран вправо на n символов
-void LCDscreenL(void);			//С каждым новым символом экран будет смещаться влево
-void LCDscreenR(void);			//С каждым новым символом экран будет смещаться вправо
-void LCDresshift(void);			//Курсор в позицию 0,0 + сброс всех сдвигов, изображение остается
+void LCDinit(void);				//Initializing the LCD 
+void LCDblank(void);			//Make invisible information on the display 
+void LCDnblank(void);			//Make visible information in the display + turn off the visible cursors
+void LCDclear(void);			//Clear the display from info + cursor to position 0,0
+void LCDcursor_bl(void);		//Enable the flashing cursor
+void LCDcursor_on(void);		//Enable underline cursor
+void LCDcursor_vi(void);		//Enable both cursors
+void LCDcursorOFF(void);		//Disable the cursor (any)
+void LCDacr(void);				//AC address counter will always be shifted to n + 1
+void LCDacl(void);				//AC address counter will always be shifted to n-1
+void LCDcursorl(void);			//Move the cursor to the left by 1 character
+void LCDcursorr(void);			//Move the cursor to the right by 1 character
+void LCDcursorln(uint8_t);		// Move the cursor to the left with n characters
+void LCDcursorrn(uint8_t);		// Move the cursor to the right by n characters
+void LCDscreenl(void);			//Move the screen to the left by 1 character
+void LCDscreenr(void);			//Move the screen to the right by 1 character
+void LCDscreenln(uint8_t);		//Move the screen to the left by n characters
+void LCDscreenrn(uint8_t);		//Move the screen to the right by n characters
+void LCDscreenL(void);			//With each new character, the screen will shift to the left
+void LCDscreenR(void);			//With each new character, the screen will shift to the right
+void LCDresshift(void);			//cursor to position 0.0 + reset all shifts, the image remains
 
 
-//Двухстрочный дисплей.
+//Two-line display
 #define LINE0 0x00
 #define LINE1 0x40
 
 #endif
 
-/*БИБЛИОТЕКА ДЛЯ ПЕРЕВОДА ДВОИЧНЫХ ЧИСЕЛ В СИМВОЛЫ И ВЫВОДА ИХ НА ЖКД*/
+/*LIBRARY FOR TRANSFER OF BINARY NUMBERS TO SYMBOLS AND CONCLUSION OF THEM ON THE LCD*/
 #if 1
-/*здесь переопределяем функцию по выводу символа на экран или в терминал
-если вывод не используется оставляем пустой макрос */
+/*Here we redefine the function to output the symbol to the screen or to the terminal
+if the output is not used leave an empty macro */
 
 #define BCD_SendData(data) //LCD_WriteData(data)
 
-/*отображать ноль в старших разрядах или нет. если закомментировать, то
-ноль не будет отображаться*/
+/*Display zero in the senior digits or not. if commented, then
+zero will not be displayed*/
 
-//#define MIRROR_NULL
+#define MIRROR_NULL
 
-/*использовать буфер или нет. если закомментировать, то запись в буфер
-не будет производиться */
+/*use the buffer or not. if commented, write to the buffer
+will not be produced */
 
 #define BCD_USE_BUF
 
-/*переводить цифры в символы или оставлять в двоично-десятичном виде. если
-закомментировать, то цифры будут сохраняться в двоично-десятичном виде, если
-оставить то в символьном виде с завершающим нулевым символом*/
+/*translate the numbers into symbols or leave them in binary-decimal form. if
+comment, then the numbers will be stored in binary-decimal form, if
+leave it in character with the trailing zero character*/
 
 #define BCD_SYM
 
-/*************************** пользовательские функции ***********************/
+/*************************** custom functions ***********************/
 
-/*Взять указатель на буфер. Если буфер не используется,
-будет возвращено нулевое значение */
+/*Take the pointer to the buffer. If the buffer is not used,
+a value of zero will be returned */
 
 uint8_t* BCD_GetPointerBuf(void);
 
-/*Преобразование 8-ми разрядных двоичных чисел. Оптимизированные функции для 1, 2 и 3-ех
-разрядных десятичных чисел. Если функции BCD_1(uint8_t value) передать 2 или 3-ех
-разрядное десятичное число, она будет работать некорректно. То же самое относится
-и к двум другим функциям*/
+/*Convert 8-bit binary numbers. Optimized functions for 1, 2 and 3-ex
+bit decimal numbers. If the functions BCD_1 (uint8_t value) transfer 2 or 3-eh
+bit decimal number, it will not work correctly. The same applies
+and to two other functions*/
 
 void BCD_1(uint8_t value);
 void BCD_2(uint8_t value);
 void BCD_3(uint8_t value);
 
-/*Преобразование 16-ти разрядных двоичных чисел. Оптимизированные функции для 3, 4 и 5-и
-разрядных десятичных чисел. Если функции BCD_3Int(uint16_t value) передать 4 или 5-и
-разрядное десятичное число, она будет работать некорректно. То же самое относится
-и к двум другим функциям*/
+/*Convert 16-bit binary numbers. Optimized functions for 3, 4 and 5-and
+bit decimal numbers. If the functions BCD_3Int (uint16_t value) pass 4 or 5
+bit decimal number, it will not work correctly. The same applies
+and to two other functions*/
 
 void BCD_3Int(uint16_t value);
 void BCD_4Int(uint16_t value);
 void BCD_5Int(uint16_t value);
 
-/*Функции для преобразования 8, 16 и 32 разрядных двоичных чисел. Все функции
-корректно работают со своими типами данных. */
+/*Functions for converting 8, 16 and 32 bit binary numbers. All functions
+correctly work with their data types */
 
 void BCD_Uchar(uint8_t value);
 void BCD_Uint(uint16_t value);
@@ -148,183 +142,184 @@ void BCD_Ulong(uint32_t value);
 
 #endif
 
-//Настройка конфигурации
+//Configuring the Configuration
 /*
-Настройка конфигурации включает в себя следующие шаги.
+Configuring the configuration includes the following steps.
 
-1. Подключение внешней библиотеки для вывода данных. 
-Если этот функционал не используется, эту строчку можно закомментировать.
+1. Connecting an external library to output data.
+If this functionality is not used, this line can be commented out.
 
-//подключаю библиотеку для вывода на lcd
+// Connect library for an output on lcd
 #include "lcd_lib.h"
 
-2. Переопределение функции вывода. Если этот функционал не используется макрос нужно оставить пустым.
+2. Override the output function. If this functionality is not used, the macro should be left blank.
 
-//вывод не используется оставляем макрос пустым
-#define BCD_SendData(data)
+// the output is not used leave the macro empty
+#define BCD_SendData (data)
 
-//вывод используется, переопределяем функцию
-#define BCD_SendData(data) LCD_WriteData(data)
+// the output is used, we redefine the function
+#define BCD_SendData (data) LCD_WriteData (data)
 
-3. Отображение нуля в старших разрядах. Если закомментировать настройку ноль выводиться не будет, 
-вместо него будет сохраняться символ пробела. Если оставить, ноль будет отображаться.
+3. Displays the zero in the upper digits. If you comment out the setting, zero will not be output,
+The space symbol will be saved instead. If left, zero will be displayed.
 
-//при такой настройке BCD_Uchar(3) отобразит на экране 003
+// with this setting, BCD_Uchar (3) will display on screen 003
 #define MIRROR_NULL
 
-//если закомментировать BCD_Uchar(3) отобразит на экране 3
-//#define MIRROR_NULL
+// if comment BCD_Uchar (3) will display on screen 3
+// # define MIRROR_NULL
 
-4. Использование буфера.
-В зависимости от настроек библиотеки, функции преобразования чисел могут сохранять результат в буфере 
-в виде строки, которую потом можно передать какой-нибудь функции вывода. Если эту настройку 
-закомментировать, то запись в буфер производиться не будет.
+4.Using the buffer.
+Depending on the library settings, the number conversion functions can store the result in the buffer
+in the form of a string, which you can then transfer to some output function. If this setting
+comment, then the buffer will not be written.
 
 #define BCD_BUF_USE
 
-5. Требуемый конечный результат. Библиотека позволяет переводить двоичные числа в двоично-десятичный вид 
-или в символьный. Если данная настройка закомментирована используется двоично-десятичное представление, если нет, то символьное.
+5. The desired final result. The library allows you to convert binary numbers to binary-decimal form
+or in character. If this setting is commented out, the binary-decimal representation is used, if not, then symbolic.
 
 #define BCD_SYM
 
-Описание функций
+Description of functions
 
-Общие функции для преобразования 8, 16 и 32 разрядных двоичных чисел.
+Common functions for converting 8, 16 and 32 bit binary numbers.
 
-void BCD_Uchar(uint8_t value) - преобразует числа от 0 до 255
-void BCD_Uint(uint16_t value) - преобразует числа от 0 до 65535
-void BCD_Ulong(uint32_t value) - преобразует числа от 0 до 4294967295
+void BCD_Uchar (uint8_t value) - converts numbers from 0 to 255
+void BCD_Uint (uint16_t value) - converts numbers from 0 to 65535
+void BCD_Ulong (uint32_t value) - converts numbers from 0 to 4294967295
 
-Пример
+Example
 
 #define F_CPU 9600000UL
 ...
 uint8_t count = 120;
 uint16_t adc_value = 1020;
 ...
-BCD_Uchar(count);
-BCD_Uint(adc_value);
-BCD_Ulong(F_CPU);
+BCD_Uchar (count);
+BCD_Uint (adc_value);
+BCD_Ulong (F_CPU);
 
-Функции для преобразования десятичных чисел заданной разрядности.
+Functions for converting decimal numbers of a given digit.
 
-void BCD_1(uint8_t value) - преобразует числа от 0 до 9
-void BCD_2(uint8_t value) - преобразует числа от 0 до 99
-void BCD_3(uint8_t value) - преобразует числа от 0 до 255
-void BCD_3Int(uint16_t value) - преобразует числа от 0 до 999
-void BCD_4Int(uint16_t value) - преобразует числа от 0 до 9999
-void BCD_5Int(uint16_t value) - преобразует числа от 0 до 65535
+void BCD_1 (uint8_t value) - converts numbers from 0 to 9
+void BCD_2 (uint8_t value) - converts numbers from 0 to 99
+void BCD_3 (uint8_t value) - converts numbers from 0 to 255
+void BCD_3Int (uint16_t value) - converts numbers from 0 to 999
+void BCD_4Int (uint16_t value) - converts numbers from 0 to 9999
+void BCD_5Int (uint16_t value) - converts numbers from 0 to 65535
 
-Пример
+Example
 
 #define DATA 23
 ...
-//переменная которая всегда < 10
+// variable that is always <10
 uint8_t index = 0;
 
-//счетчик до 999
+// counter up to 999
 uint8_t count;
 ...
-BCD_1(index);
-BCD_2(DATA);
-BCD_3Int(count);
+BCD_1 (index);
+BCD_2 (DATA);
+BCD_3Int (count);
 
-//а это неправильно
-BCD_1(DATA);
-BCD_3(count);
+// this is wrong
+BCD_1 (DATA);
+BCD_3 (count);
 
-Функция для получения указателя на буфер, в котором сохраняется результат. Если буфер не используется, функция возвращает нулевой указатель.
+Function to get a pointer to the buffer in which the result is stored. If the buffer is not used, the function returns a null pointer.
 
-uint8_t* BCD_GetPointerBuf(void);
+uint8_t * BCD_GetPointerBuf (void);
 
-Пример
-//определяем переменную указатель на буфер
-uint8_t* pBuf;
+Example
+// define a variable pointer to the buffer
+uint8_t * pBuf;
 
-//инициализируем эту переменную
-pBuf = BCD_GetPointerBuf();
+// initialize this variable
+pBuf = BCD_GetPointerBuf ();
 
-//преобразуем число, а затем выводим строку на экран
-BCD_3Int(counter);
-LCD_SendStr(pBuf);*/
-//Примеры использования команд
+// convert the number, and then display the line on the screen
+BCD_3Int (counter);
+LCD_SendStr (pBuf); */
+
+//Examples of using commands
 /*
-LCDcommand(0b00101000);//Включаем 4х битный интерфейс приема/передачи и выбираем 5x8 точек.
-LCDcommand(0b00000001);//Очистка экрана
-LCDcommand(0b00000010);//Установка курсора в позицию 0,0 + сброс сдвигов
-LCDcommand(0b00000110);//Вкл. инкримент счетчика адреса, движение изображения отк.
-LCDcommand(0b00001100);//Включаем отображение на дисплее + без отображения курсора.
+LCDcommand (0b00101000); // Turn on the 4-bit transmit / receive interface and select 5x8 pixels.
+LCDcommand (0b00000001); // Cleaning the screen
+LCDcommand (0b00000010); // Set cursor to position 0.0 + reset shifts
+LCDcommand (0b00000110); // On. counter of address counter, image movement.
+LCDcommand (0b00001100); // Turn on the display + without displaying the cursor.
 
-LCDdata('A');			//Вывели символ А
-LCDGotoXY(6,1);			//Перевели курсор в седьмую позицию вторая строка.
-LCDdata('B');			//И вывели символ В
-LCDdataXY('Щ',0,0); Вывели символ Щ в позицию 0,0
-LCDdata('у');
-LCDdata('к');
-LCDdata('а');
+LCDdata ('A');			// Print the A
+LCDGotoXY (6.1);		// Move the cursor to the seventh position the second line.
+LCDdata ('B');			// And output the character B
+LCDdataXY ('T', 0,0);   //The symbol T was taken to position 0,0
+LCDdata ('y');
+LCDdata ('to');
+LCDdata ('a');
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-LCDGotoXY(1,1);			    //Перевели курсор в позицию 1,1.
-LCDsendString("Пучеглазка");//Вывели  Пучеглазка
+LCDGotoXY (1,1); // Move the cursor to the position 1.1.
+LCDsendString; // Output Goggles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-LCDstring("Красава Пучеглазка",0,1);//Вывели строку в позицию 0,1
+LCDstring ("Pretty Eyes", 0.1); // Output the string to the position 0,1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Сперва объявим в озу uint8_t  text_1[]="Пучеглазка_3";
-LCDstring_of_sram(text_1,0,0); а теперь выведем строку в позицию 0,0
+First, declare in an ounce uint8_t text_1 [] = "Goggles_3";
+LCDstring_of_sram (text_1,0,0); and now output the line to the position 0,0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Сперва объявим во флеш const uint8_t PROGMEM text_1[]="Пучеглазка_1";
-LCDstring_of_flash(text_1,0,0); а теперь выведем строку в позицию 0,0
+First, we'll declare in the flush const uint8_t PROGMEM text_1 [] = "Bug-eyed_1";
+LCDstring_of_flash (text_1,0,0); and now output the line to the position 0,0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~							 						 
 */
 
 /*
-Инициализация дисплея проводится таким образом.
-1.Включаем питание.
-2.После VCC >=4.5V ждем не менее 15 мсек.
-3.Отправка команды 0x30 - 0b110000
-4.Ждем не менее 4.1 мсек
-5.Отправка команды 0x30
-6.Ждем не менее 100 мксек
-7.Отправка команды 0x30
-Приведенные выше операции являются инициализирующими для LCD
-и способны вывести дисплей в рабочее состояние из любого состояния.
-8.Далее работаем с дисплеем в обычном режиме.
+The display is initialized in this way.
+1. Turn on the power.
+2.After VCC> = 4.5V wait at least 15 msec.
+3. Sending the command 0x30 - 0b110000
+4.We wait at least 4.1 msec
+5.Send the command 0x30
+6.We are not less than 100 usec
+Sending the command 0x30
+The above operations are initializing for the LCD
+and are able to bring the display into operation from any state.
+8.Next work with the display in the normal mode.
 
-В исходном состоянии Е=0, R/W=0, RS - произвольное, DB0...DB7 высокий импеданс (HI).
-Такое состояние должно сигналов Е=0, R/W=0 должно поддерживаться все время в пррмежутках между
-операциями обмена данными с МК.
+In the initial state, E = 0, R / W = 0, RS is an arbitrary, DB0 ... DB7 high impedance (HI).
+Such a state should signal E = 0, R / W = 0 should be maintained all the time in between
+data exchange operations with the MC.
 
-Дисплей настраиваем так:
+The display is configured like this:
 
-int main(void)
+int main (void)
 {
-	init();		//Инициализация МК.
-	LCDinit();	//Инициализация LCD, эту функцию в первую очередь, потом все остальное.
+	init (); // Initialize the MK.
+	LCDinit (); // Initialize the LCD, this function first, then everything else.
 
-	while(1)//Главный цикл программы.
+	while (1) // The main program loop.
 	{
-		
+
 	}
 }
 
-Карта символов дисплея.
-LCDGotoXY(3,1);
-Цифра 3 означает четвертую позицию в любой строке. Если 0, то это первая позиция в любой строке.
-цифра 1 означает нижнюю строку а 0 верхнюю.
-|0,0|1,0|2,0|3,0|4,0|5,0|6,0|7,0| - первая строка
-|0,1|1,1|2,1|3,1|4,1|5,1|6,1|7,1| - вторая строка
+Map of display symbols.
+LCDGotoXY (3,1);
+The number 3 means the fourth position in any line. If 0, then this is the first position in any line.
+the number 1 means the lower line and 0 the upper.
+| 0,0 | 1,0 | 2,0 | 3,0 | 4,0 | 5,0 | 6,0 | 7,0 | - First line
+| 0,1 | 1,1 | 2,1 | 3,1 | 4,1 | 5,1 | 6,1 | 7,1 | - second line
 
-1  0  0
-1 I/D S  
-I/D - смещение счетчика адреса, 0-уменьшение 1-увеличение
-S   - сдвиг содержимого экрана 0 содержимое не сдвигается, 1 сдвигается, 
-      если I/D - 0 то вправо, если 1 то влево.
-LCDcommand(100) - счетчик n-1, экран не сдвигается. Символы будут выводится  <-
-LCDcommand(110) - счетчик n+1, экран не сдвигается. Символы будут выводится  ->
-LCDcommand(101)	- счетчик n-1, изображение сдвигается вправо с каждым новым символом
-LCDcommand(111) - счетчик n+1, изображение сдвигается влево с каждым новым символом
-	   	   
-1   0   0   0  0	   
-1  S/C R/L  -  -     
-S/C (screen/cursor) - 0 сдвигается курсор, 1 сдвигается экран.
-R/L (right/left)    - 0 сдвиг влево, 1 сдвиг вправо. за одну команду на 1 сдвиг
+100
+1 I / D S
+I / D - address counter offset, 0-reduction 1-increase
+S - screen content shift 0 content is not shifted, 1 is shifted,
+if I / D - 0, then to the right, if 1 then to the left.
+LCDcommand (100) - counter n-1, the screen does not shift. The symbols will be displayed <-
+LCDcommand (110) - counter n + 1, the screen does not shift. Characters will be displayed ->
+LCDcommand (101) - counter n-1, the image is shifted to the right with each new symbol
+LCDcommand (111) - counter n + 1, the image is shifted to the left with each new symbol
+
+1 0 0 0 0
+1 S / C R / L - -
+S / C (screen / cursor) - 0 the cursor is shifted, 1 the screen is shifted.
+R / L (right / left) - 0 shift left, 1 shift right. for one command for 1 shift
 */
