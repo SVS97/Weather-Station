@@ -64,7 +64,7 @@ uint8_t Receive_data22()					/* Receive data 		*/
 }
 
 
-int getdht22 (int *temperature22, int * humidity22)
+void getdht22 (uint16_t *temperature22, uint16_t * humidity22)
 {
 	
 	uint8_t I_RH,D_RH,I_Temp,D_Temp,CheckSum;		/* temp					*/

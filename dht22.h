@@ -5,10 +5,10 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define DHT22_BIT 2				/* Number of pin DHT22		*/
-#define DHT22_PORT PORTD			/* PORT DHT22			*/
-#define DHT22_DDR DDRD				/* PORT DDR DHT22		*/
-#define DHT22_PIN PIND
+#define DHT22_BIT 3				/* Number of pin DHT22		*/
+#define DHT22_PORT PORTB			/* PORT DHT22			*/
+#define DHT22_DDR DDRB				/* PORT DDR DHT22		*/
+#define DHT22_PIN PINB
 
 
 
@@ -22,4 +22,4 @@ uint8_t Receive_data22();
  * @ temperature - temperature value transmitted by pointer
  * @ humidity - humidity value transmitted by pointer
 */
-int getdht22 (int *temperature22, int *humidity22);
+void getdht22 (uint16_t *temperature22, uint16_t *humidity22);

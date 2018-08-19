@@ -62,7 +62,7 @@ uint8_t Receive_data11()			/* receive data */
 }
 
 
-int getdht11 (int *temperature, int * humidity)
+void getdht11 (uint16_t *temperature, uint16_t * humidity)
 {
 	
 	uint8_t I_RH,D_RH,I_Temp,D_Temp,CheckSum;		/* temp					*/

@@ -469,6 +469,7 @@ void LCDstring_of_sram(uint8_t* data,uint8_t nBytes,uint8_t x, uint8_t y)
 #ifdef BCD_SYM
 #define BCD_SYMBOL  48
 
+
 #ifdef MIRROR_NULL
 #define SYMB_NULL 48
 #else
