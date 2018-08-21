@@ -380,6 +380,8 @@ void bmp180Convert(int16_t BMP180_calibration_int16_t[],int16_t BMP180_calibrati
 
 void BMP180_Calibration(int16_t BMP180_calibration_int16_t[],int16_t BMP180_calibration_uint16_t[], uint8_t* errorcode)
 {
+	i2cSetBitrate(1000);											/* Initialize TWI */
+	
 	if (*errorcode==0){
 		BMP180_calibration_int16_t[0] = bmp180ReadShort(0xAA,errorcode);//ac1
 	}	

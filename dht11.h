@@ -8,14 +8,6 @@
 #define DHT11_DDR DDRB				/* PORT DDR DHT11			*/
 #define DHT11_PIN PINB				/* Pin DHT11				*/
 
-/* Sending request to sensor */
-void Request11();
-
-/* Getting response from sensor */
-void Response11();
-
-/*Reading data from sensor*/
-uint8_t Receive_data11();
 
 /* Receiving and Calculating temperature and humidity 
  * @ temperature - temperature value transmitted by pointer

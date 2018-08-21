@@ -11,14 +11,6 @@
 #define DHT22_PIN PINB				/* Pin DHT22				*/
 
 
-
-/*Sending request to sensor*/
-void Request22();
-/*Getting response from sensor*/
-void Response22();
-/*Reading data from sensor*/
-uint8_t Receive_data22();
-
 /* Receiving and Calculating temperature and humidity 
  * @ temperature - temperature value transmitted by pointer
  * @ humidity - humidity value transmitted by pointer

@@ -79,6 +79,4 @@ void getdht11 (uint16_t *temperature, uint16_t * humidity)
 	sei();
 	*temperature = I_Temp;					/* calculating temperature			*/
 	*humidity=  I_RH;						/* calculating humidity				*/
-	
-	
 }

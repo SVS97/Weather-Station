@@ -501,12 +501,12 @@ static uint8_t i;
 	BCD_SaveDataInBuf(digit, buf, i);                   \
 	BCD_SendData(digit); }while(0)
 
-uint8_t* BCD_GetPointerBuf(void)
+char* BCD_GetPointerBuf(void)
 {
 	#ifdef BCD_USE_BUF
-	return (uint8_t*)buf;
+	return (char*)buf;
 	#else
-	return (uint8_t *)0;
+	return (char*)0;
 	#endif
 }
 

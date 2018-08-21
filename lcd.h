@@ -53,7 +53,7 @@ void LCDsendString(char*);										//Display the string
 void LCDstringXY(char*,uint8_t,uint8_t);						//Display the string at position x, y
 void LCDstring_of_sramXY(uint8_t*,uint8_t,uint8_t);				//Display the string at position x, y from RAM		
 void LCDstring_of_flashXY(const uint8_t*,uint8_t, uint8_t);		//Display the string to the position x, y from the flash
-
+//(char *)pBuf;
 void LCDinit(void);				//Initializing the LCD 
 void LCDblank(void);			//Make invisible information on the display 
 void LCDnblank(void);			//Make visible information in the display + turn off the visible cursors
@@ -111,7 +111,7 @@ leave it in character with the trailing zero character*/
 /*Take the pointer to the buffer. If the buffer is not used,
 a value of zero will be returned */
 
-uint8_t* BCD_GetPointerBuf(void);
+char* BCD_GetPointerBuf(void);
 
 /*Convert 8-bit binary numbers. Optimized functions for 1, 2 and 3-ex
 bit decimal numbers. If the functions BCD_1 (uint8_t value) transfer 2 or 3-eh
