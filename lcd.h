@@ -1,8 +1,8 @@
 
 /* Type of MCU:			Atmega16, Flash 16 Kbytes, SRAM 1 Kbytes, EEPROM 512 bytes.
- * Description:         A trimmed library for working with LCD displays based on HD44780
-						controllers. This library operates on a 4-bit and 8-bit connection scheme
-						LCD, supports only display data*/
+ * Description:         	A trimmed library for working with LCD displays based on HD44780
+				controllers. This library operates on a 4-bit and 8-bit connection scheme
+				LCD, supports only display data*/
 
 #include <inttypes.h>
 
@@ -16,13 +16,13 @@
 
 #if 1
 
-//Specify the port to which the LCD display DB0 ... DB7 terminals are connected.
+/* Specify the port to which the LCD display DB0 ... DB7 terminals are connected	*/
 #define DPIN  PIND
 #define DDDR  DDRD
 #define DPORT PORTD	
 
-//In figures, we indicate the pin numbers m connected to the display.						
-//PIN	MCU		LCD   
+/* In figures, we indicate the pin numbers m connected to the display 			*/					
+/* PIN	MCU	LCD   */
 #define DB0	0// DB0
 #define DB1	1// DB1
 #define DB2	2// DB2	
@@ -32,106 +32,105 @@
 #define DB6	5// DB6
 #define DB7	4// DB7 
 
-//Specify the port to which the display pins E, RS, R / W are connected.
+/* Specify the port to which the display pins E, RS, R / W are connected 		*/
 #define CDDR  DDRB
 #define CPORT PORTB
 
-// Specify the pin numbers of the MK to which the display is connected.
+/* Specify the pin numbers of the MK to which the display is connected 			*/
 #define E	0	// E	
-#define RW	2   // R/W		R / W = 1 is read from the LCD, R / W = 0 is written in the LCD.
-#define RS	1 	// RS		RS = 0 send the command to the LCD, RS = 1 send the data to the LCD.
+#define RW	2   	/* R/W		R / W = 1 is read from the LCD, R / W = 0 is written in the LCD		*/
+#define RS	1 	/* RS		RS = 0 send the command to the LCD, RS = 1 send the data to the LCD	*/
 
 #endif
 //----------------------------------Settings complete---------------------------------
 #if 1
-//Custom functions, which used in the program.
+/* Custom functions, which used in the program 	*/
                    
-void LCDGotoXY(uint8_t,uint8_t);								//Set cursor to X, Y position
-void LCDdata(uint8_t);											//Display 1 character 
-void LCDdataXY(uint8_t,uint8_t,uint8_t);						//Display 1 character in the display in the X, Y position
-void LCDsendString(char*);										//Display the string
-void LCDstringXY(char*,uint8_t,uint8_t);						//Display the string at position x, y
-void LCDstring_of_sramXY(uint8_t*,uint8_t,uint8_t);				//Display the string at position x, y from RAM		
-void LCDstring_of_flashXY(const uint8_t*,uint8_t, uint8_t);		//Display the string to the position x, y from the flash
-//(char *)pBuf;
-void LCDinit(void);				//Initializing the LCD 
-void LCDblank(void);			//Make invisible information on the display 
-void LCDnblank(void);			//Make visible information in the display + turn off the visible cursors
-void LCDclear(void);			//Clear the display from info + cursor to position 0,0
-void LCDcursor_bl(void);		//Enable the flashing cursor
-void LCDcursor_on(void);		//Enable underline cursor
-void LCDcursor_vi(void);		//Enable both cursors
-void LCDcursorOFF(void);		//Disable the cursor (any)
-void LCDacr(void);				//AC address counter will always be shifted to n + 1
-void LCDacl(void);				//AC address counter will always be shifted to n-1
-void LCDcursorl(void);			//Move the cursor to the left by 1 character
-void LCDcursorr(void);			//Move the cursor to the right by 1 character
-void LCDcursorln(uint8_t);		// Move the cursor to the left with n characters
-void LCDcursorrn(uint8_t);		// Move the cursor to the right by n characters
-void LCDscreenl(void);			//Move the screen to the left by 1 character
-void LCDscreenr(void);			//Move the screen to the right by 1 character
-void LCDscreenln(uint8_t);		//Move the screen to the left by n characters
-void LCDscreenrn(uint8_t);		//Move the screen to the right by n characters
-void LCDscreenL(void);			//With each new character, the screen will shift to the left
-void LCDscreenR(void);			//With each new character, the screen will shift to the right
-void LCDresshift(void);			//cursor to position 0.0 + reset all shifts, the image remains
+void LCDGotoXY(uint8_t,uint8_t);						/* Set cursor to X, Y position 							*/
+void LCDdata(uint8_t);								/* Display 1 character 								*/
+void LCDdataXY(uint8_t,uint8_t,uint8_t);					/* Display 1 character in the display in the X, Y position 			*/
+void LCDsendString(char*);							/* Display the string								*/
+void LCDstringXY(char*,uint8_t,uint8_t);					/* Display the string at position x, y						*/
+void LCDstring_of_sramXY(uint8_t*,uint8_t,uint8_t);				/* Display the string at position x, y from RAM					*/
+void LCDstring_of_flashXY(const uint8_t*,uint8_t, uint8_t);			/* Display the string to the position x, y from the flash 			*/
+void LCDinit(void);								/* Initializing the LCD 							*/
+void LCDblank(void);								/* Make invisible information on the display 					*/
+void LCDnblank(void);								/* Make visible information in the display + turn off the visible cursors	*/
+void LCDclear(void);								/* Clear the display from info + cursor to position 0,0				*/
+void LCDcursor_bl(void);							/* Enable the flashing cursor							*/
+void LCDcursor_on(void);							/* Enable underline cursor 							*/
+void LCDcursor_vi(void);							/* Enable both cursors								*/
+void LCDcursorOFF(void);							/* Disable the cursor (any)							*/
+void LCDacr(void);								/* AC address counter will always be shifted to n + 1				*/
+void LCDacl(void);								/* AC address counter will always be shifted to n-1				*/
+void LCDcursorl(void);								/* Move the cursor to the left by 1 character					*/
+void LCDcursorr(void);								/* Move the cursor to the right by 1 character					*/
+void LCDcursorln(uint8_t);							/* Move the cursor to the left with n characters				*/
+void LCDcursorrn(uint8_t);							/* Move the cursor to the right by n characters					*/
+void LCDscreenl(void);								/* Move the screen to the left by 1 character					*/
+void LCDscreenr(void);								/* Move the screen to the right by 1 character					*/
+void LCDscreenln(uint8_t);							/* Move the screen to the left by n characters					*/
+void LCDscreenrn(uint8_t);							/* Move the screen to the right by n characters					*/
+void LCDscreenL(void);								/* With each new character, the screen will shift to the left			*/
+void LCDscreenR(void);								/* With each new character, the screen will shift to the right 			*/
+void LCDresshift(void);								/* Cursor to position 0.0 + reset all shifts, the image remains			*/
 
 
-//Two-line display
+/* Two-line display */
 #define LINE0 0x00
 #define LINE1 0x40
 
 #endif
 
-/*LIBRARY FOR TRANSFER OF BINARY NUMBERS TO SYMBOLS AND CONCLUSION OF THEM ON THE LCD*/
+/* LIBRARY FOR TRANSFER OF BINARY NUMBERS TO SYMBOLS AND CONCLUSION OF THEM ON THE LCD */
 #if 1
-/*Here we redefine the function to output the symbol to the screen or to the terminal
+/* Here we redefine the function to output the symbol to the screen or to the terminal
 if the output is not used leave an empty macro */
 
-#define BCD_SendData(data) //LCD_WriteData(data)
+#define BCD_SendData(data) /* LCD_WriteData(data) */
 
-/*Display zero in the senior digits or not. if commented, then
-zero will not be displayed*/
+/* Display zero in the senior digits or not. if commented, then
+zero will not be displayed */
 
 #define MIRROR_NULL
 
-/*use the buffer or not. if commented, write to the buffer
+/* Use the buffer or not. if commented, write to the buffer
 will not be produced */
 
 #define BCD_USE_BUF
 
-/*translate the numbers into symbols or leave them in binary-decimal form. if
+/* Translate the numbers into symbols or leave them in binary-decimal form. if
 comment, then the numbers will be stored in binary-decimal form, if
-leave it in character with the trailing zero character*/
+leave it in character with the trailing zero character */
 
 #define BCD_SYM
 
-/*************************** custom functions ***********************/
+/*************************** Custom Functions ***********************/
 
-/*Take the pointer to the buffer. If the buffer is not used,
+/* Take the pointer to the buffer. If the buffer is not used,
 a value of zero will be returned */
 
 char* BCD_GetPointerBuf(void);
 
-/*Convert 8-bit binary numbers. Optimized functions for 1, 2 and 3-ex
+/* Convert 8-bit binary numbers. Optimized functions for 1, 2 and 3-ex
 bit decimal numbers. If the functions BCD_1 (uint8_t value) transfer 2 or 3-eh
 bit decimal number, it will not work correctly. The same applies
-and to two other functions*/
+and to two other functions */
 
 void BCD_1(uint8_t value);
 void BCD_2(uint8_t value);
 void BCD_3(uint8_t value);
 
-/*Convert 16-bit binary numbers. Optimized functions for 3, 4 and 5-and
+/* Convert 16-bit binary numbers. Optimized functions for 3, 4 and 5-and
 bit decimal numbers. If the functions BCD_3Int (uint16_t value) pass 4 or 5
 bit decimal number, it will not work correctly. The same applies
-and to two other functions*/
+and to two other functions */
 
 void BCD_3Int(uint16_t value);
 void BCD_4Int(uint16_t value);
 void BCD_5Int(uint16_t value);
 
-/*Functions for converting 8, 16 and 32 bit binary numbers. All functions
+/* Functions for converting 8, 16 and 32 bit binary numbers. All functions
 correctly work with their data types */
 
 void BCD_Uchar(uint8_t value);
@@ -142,7 +141,7 @@ void BCD_Ulong(uint32_t value);
 
 #endif
 
-//Configuring the Configuration
+//Configuring 
 /*
 Configuring the configuration includes the following steps.
 

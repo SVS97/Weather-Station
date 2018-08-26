@@ -1,0 +1,87 @@
+\section{dht11.\+c File Reference}
+\label{dht11_8c}\index{dht11.\+c@{dht11.\+c}}
+{\ttfamily \#include \char`\"{}dht11.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ Request11} ()
+\begin{DoxyCompactList}\small\item\em Micro controller send start pulse/request ~\newline
+ \end{DoxyCompactList}\item 
+void \textbf{ Response11} ()
+\begin{DoxyCompactList}\small\item\em Receive response from D\+H\+T11 ~\newline
+ \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Receive\+\_\+data11} ()
+\begin{DoxyCompactList}\small\item\em Receive data from sensor. \end{DoxyCompactList}\item 
+void \textbf{ getdht11} (uint16\+\_\+t $\ast$\textbf{ temperature}, uint16\+\_\+t $\ast$humidity)
+\begin{DoxyCompactList}\small\item\em Receiving and Calculating temperature and humidity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \textbf{ c} =0
+\begin{DoxyCompactList}\small\item\em Temp. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\label{dht11_8c_aa1c9d997d8a873b42eb1ce898120e133}} 
+\index{dht11.\+c@{dht11.\+c}!getdht11@{getdht11}}
+\index{getdht11@{getdht11}!dht11.\+c@{dht11.\+c}}
+\subsubsection{getdht11()}
+{\footnotesize\ttfamily void getdht11 (\begin{DoxyParamCaption}\item[{uint16\+\_\+t $\ast$}]{temperature,  }\item[{uint16\+\_\+t $\ast$}]{humidity }\end{DoxyParamCaption})}
+
+
+
+Receiving and Calculating temperature and humidity. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em $\ast$temperature} & \+: temperature value transmitted by pointer \\
+\hline
+\mbox{\tt in}  & {\em $\ast$humidity} & \+: humidity value transmitted by pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\label{dht11_8c_ac61e4e265084f57b4c1ba307bdb37836}} 
+\index{dht11.\+c@{dht11.\+c}!Receive\+\_\+data11@{Receive\+\_\+data11}}
+\index{Receive\+\_\+data11@{Receive\+\_\+data11}!dht11.\+c@{dht11.\+c}}
+\subsubsection{Receive\+\_\+data11()}
+{\footnotesize\ttfamily uint8\+\_\+t Receive\+\_\+data11 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Receive data from sensor. 
+
+\mbox{\label{dht11_8c_abb1c28626e684f89974c2ec9defaf09a}} 
+\index{dht11.\+c@{dht11.\+c}!Request11@{Request11}}
+\index{Request11@{Request11}!dht11.\+c@{dht11.\+c}}
+\subsubsection{Request11()}
+{\footnotesize\ttfamily void Request11 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Micro controller send start pulse/request ~\newline
+ 
+
+\mbox{\label{dht11_8c_a4bbadf157d9fe443c3592333a9313dfb}} 
+\index{dht11.\+c@{dht11.\+c}!Response11@{Response11}}
+\index{Response11@{Response11}!dht11.\+c@{dht11.\+c}}
+\subsubsection{Response11()}
+{\footnotesize\ttfamily void Response11 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Receive response from D\+H\+T11 ~\newline
+ 
+
+
+
+\subsection{Variable Documentation}
+\mbox{\label{dht11_8c_a2e5a04327b5658199f0f7bda2acceee1}} 
+\index{dht11.\+c@{dht11.\+c}!c@{c}}
+\index{c@{c}!dht11.\+c@{dht11.\+c}}
+\subsubsection{c}
+{\footnotesize\ttfamily uint8\+\_\+t c =0}
+
+
+
+Temp. 
+

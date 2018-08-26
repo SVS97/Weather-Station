@@ -1,0 +1,92 @@
+\section{dht22.\+h File Reference}
+\label{dht22_8h}\index{dht22.\+h@{dht22.\+h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$util/delay.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ F\+\_\+\+C\+PU}~16000000\+UL
+\item 
+\#define \textbf{ D\+H\+T22\+\_\+\+B\+IT}~3
+\begin{DoxyCompactList}\small\item\em Number of pin D\+H\+T22. \end{DoxyCompactList}\item 
+\#define \textbf{ D\+H\+T22\+\_\+\+P\+O\+RT}~P\+O\+R\+TB
+\begin{DoxyCompactList}\small\item\em P\+O\+RT D\+H\+T22. \end{DoxyCompactList}\item 
+\#define \textbf{ D\+H\+T22\+\_\+\+D\+DR}~D\+D\+RB
+\begin{DoxyCompactList}\small\item\em D\+DR D\+H\+T22. \end{DoxyCompactList}\item 
+\#define \textbf{ D\+H\+T22\+\_\+\+P\+IN}~P\+I\+NB
+\begin{DoxyCompactList}\small\item\em Pin D\+H\+T22. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ getdht22} (uint16\+\_\+t $\ast$\textbf{ temperature22}, uint16\+\_\+t $\ast$\textbf{ humidity22})
+\begin{DoxyCompactList}\small\item\em Receiving and Calculating temperature and humidity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{dht22_8h_a57c1f43219826366412ed03f5e855aed}} 
+\index{dht22.\+h@{dht22.\+h}!D\+H\+T22\+\_\+\+B\+IT@{D\+H\+T22\+\_\+\+B\+IT}}
+\index{D\+H\+T22\+\_\+\+B\+IT@{D\+H\+T22\+\_\+\+B\+IT}!dht22.\+h@{dht22.\+h}}
+\subsubsection{D\+H\+T22\+\_\+\+B\+IT}
+{\footnotesize\ttfamily \#define D\+H\+T22\+\_\+\+B\+IT~3}
+
+
+
+Number of pin D\+H\+T22. 
+
+\mbox{\label{dht22_8h_a74c68ac1269f94a3c36135c0f3967eb8}} 
+\index{dht22.\+h@{dht22.\+h}!D\+H\+T22\+\_\+\+D\+DR@{D\+H\+T22\+\_\+\+D\+DR}}
+\index{D\+H\+T22\+\_\+\+D\+DR@{D\+H\+T22\+\_\+\+D\+DR}!dht22.\+h@{dht22.\+h}}
+\subsubsection{D\+H\+T22\+\_\+\+D\+DR}
+{\footnotesize\ttfamily \#define D\+H\+T22\+\_\+\+D\+DR~D\+D\+RB}
+
+
+
+D\+DR D\+H\+T22. 
+
+\mbox{\label{dht22_8h_a170c6a1904d45873b6bf59acd2509143}} 
+\index{dht22.\+h@{dht22.\+h}!D\+H\+T22\+\_\+\+P\+IN@{D\+H\+T22\+\_\+\+P\+IN}}
+\index{D\+H\+T22\+\_\+\+P\+IN@{D\+H\+T22\+\_\+\+P\+IN}!dht22.\+h@{dht22.\+h}}
+\subsubsection{D\+H\+T22\+\_\+\+P\+IN}
+{\footnotesize\ttfamily \#define D\+H\+T22\+\_\+\+P\+IN~P\+I\+NB}
+
+
+
+Pin D\+H\+T22. 
+
+\mbox{\label{dht22_8h_a36b47ecfbc1c1ee71d90f0967874c720}} 
+\index{dht22.\+h@{dht22.\+h}!D\+H\+T22\+\_\+\+P\+O\+RT@{D\+H\+T22\+\_\+\+P\+O\+RT}}
+\index{D\+H\+T22\+\_\+\+P\+O\+RT@{D\+H\+T22\+\_\+\+P\+O\+RT}!dht22.\+h@{dht22.\+h}}
+\subsubsection{D\+H\+T22\+\_\+\+P\+O\+RT}
+{\footnotesize\ttfamily \#define D\+H\+T22\+\_\+\+P\+O\+RT~P\+O\+R\+TB}
+
+
+
+P\+O\+RT D\+H\+T22. 
+
+\mbox{\label{dht22_8h_a43bafb28b29491ec7f871319b5a3b2f8}} 
+\index{dht22.\+h@{dht22.\+h}!F\+\_\+\+C\+PU@{F\+\_\+\+C\+PU}}
+\index{F\+\_\+\+C\+PU@{F\+\_\+\+C\+PU}!dht22.\+h@{dht22.\+h}}
+\subsubsection{F\+\_\+\+C\+PU}
+{\footnotesize\ttfamily \#define F\+\_\+\+C\+PU~16000000\+UL}
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{dht22_8h_af6389918663cd1aec49e0fb1919ceea4}} 
+\index{dht22.\+h@{dht22.\+h}!getdht22@{getdht22}}
+\index{getdht22@{getdht22}!dht22.\+h@{dht22.\+h}}
+\subsubsection{getdht22()}
+{\footnotesize\ttfamily void getdht22 (\begin{DoxyParamCaption}\item[{uint16\+\_\+t $\ast$}]{temperature22,  }\item[{uint16\+\_\+t $\ast$}]{humidity22 }\end{DoxyParamCaption})}
+
+
+
+Receiving and Calculating temperature and humidity. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em $\ast$temperature} & \+: temperature value transmitted by pointer \\
+\hline
+\mbox{\tt in}  & {\em $\ast$humidity} & \+: humidity value transmitted by pointer \\
+\hline
+\end{DoxyParams}

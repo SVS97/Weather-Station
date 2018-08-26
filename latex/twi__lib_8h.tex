@@ -1,0 +1,133 @@
+\section{twi\+\_\+lib.\+h File Reference}
+\label{twi__lib_8h}\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$util/delay.\+h$>$}\newline
+{\ttfamily \#include $<$util/twi.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ \+\_\+\+T\+W\+I\+\_\+\+L\+I\+B\+\_\+\+H\+\_\+}~1
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ i2c\+Set\+Bitrate} (uint16\+\_\+t bitratek\+Hz)
+\begin{DoxyCompactList}\small\item\em Set the I2C transaction bitrate (in K\+Hz) \end{DoxyCompactList}\item 
+void \textbf{ i2c\+Send\+Start} (void)
+\begin{DoxyCompactList}\small\item\em Send an I2C start condition in Master mode or repeated start condition. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ i2c\+Send\+Stop} (void)
+\begin{DoxyCompactList}\small\item\em Send an I2C stop condition in Master mode. \end{DoxyCompactList}\item 
+void \textbf{ i2c\+Send\+Byte} (unsigned char data)
+\begin{DoxyCompactList}\small\item\em Send an (address$\vert$\+R/W) combination or a data byte over I2C. \end{DoxyCompactList}\item 
+void \textbf{ i2c\+Receive\+Byte\+A\+CK} (void)
+\begin{DoxyCompactList}\small\item\em Receive a data byte over I2C. \end{DoxyCompactList}\item 
+void \textbf{ i2c\+Receive\+Byte\+N\+A\+CK} (void)
+\begin{DoxyCompactList}\small\item\em Receive a data byte over I2C. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ i2c\+Get\+Received\+Byte} (void)
+\begin{DoxyCompactList}\small\item\em get received byte back \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ i2c\+Wait\+For\+Complete} (void)
+\begin{DoxyCompactList}\small\item\em Wait for current I2C operation to complete. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ checki2c\+Return\+Code} (uint8\+\_\+t expected\+\_\+return\+\_\+code)
+\begin{DoxyCompactList}\small\item\em Check for expected error code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{twi__lib_8h_a2ae027a17025fb40f5828c553bd1b43d}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!\+\_\+\+T\+W\+I\+\_\+\+L\+I\+B\+\_\+\+H\+\_\+@{\+\_\+\+T\+W\+I\+\_\+\+L\+I\+B\+\_\+\+H\+\_\+}}
+\index{\+\_\+\+T\+W\+I\+\_\+\+L\+I\+B\+\_\+\+H\+\_\+@{\+\_\+\+T\+W\+I\+\_\+\+L\+I\+B\+\_\+\+H\+\_\+}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{\+\_\+\+T\+W\+I\+\_\+\+L\+I\+B\+\_\+\+H\+\_\+}
+{\footnotesize\ttfamily \#define \+\_\+\+T\+W\+I\+\_\+\+L\+I\+B\+\_\+\+H\+\_\+~1}
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{twi__lib_8h_a1e9ae86c3504a336f13c1d18fb2dbe71}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!checki2c\+Return\+Code@{checki2c\+Return\+Code}}
+\index{checki2c\+Return\+Code@{checki2c\+Return\+Code}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{checki2c\+Return\+Code()}
+{\footnotesize\ttfamily uint8\+\_\+t checki2c\+Return\+Code (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{expected\+\_\+return\+\_\+code }\end{DoxyParamCaption})}
+
+
+
+Check for expected error code. 
+
+\mbox{\label{twi__lib_8h_ae52eda1b046fb2fa3919399cf3aa8274}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!i2c\+Get\+Received\+Byte@{i2c\+Get\+Received\+Byte}}
+\index{i2c\+Get\+Received\+Byte@{i2c\+Get\+Received\+Byte}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{i2c\+Get\+Received\+Byte()}
+{\footnotesize\ttfamily uint8\+\_\+t i2c\+Get\+Received\+Byte (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+get received byte back 
+
+\mbox{\label{twi__lib_8h_a4184f1fc2b762cc5f8032ee9df97e92c}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!i2c\+Receive\+Byte\+A\+CK@{i2c\+Receive\+Byte\+A\+CK}}
+\index{i2c\+Receive\+Byte\+A\+CK@{i2c\+Receive\+Byte\+A\+CK}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{i2c\+Receive\+Byte\+A\+C\+K()}
+{\footnotesize\ttfamily void i2c\+Receive\+Byte\+A\+CK (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Receive a data byte over I2C. 
+
+\mbox{\label{twi__lib_8h_afaacac2e6df78d08983de116deaab23a}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!i2c\+Receive\+Byte\+N\+A\+CK@{i2c\+Receive\+Byte\+N\+A\+CK}}
+\index{i2c\+Receive\+Byte\+N\+A\+CK@{i2c\+Receive\+Byte\+N\+A\+CK}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{i2c\+Receive\+Byte\+N\+A\+C\+K()}
+{\footnotesize\ttfamily void i2c\+Receive\+Byte\+N\+A\+CK (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Receive a data byte over I2C. 
+
+\mbox{\label{twi__lib_8h_a9496352bbfeb53c358f4dfd053497f33}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!i2c\+Send\+Byte@{i2c\+Send\+Byte}}
+\index{i2c\+Send\+Byte@{i2c\+Send\+Byte}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{i2c\+Send\+Byte()}
+{\footnotesize\ttfamily void i2c\+Send\+Byte (\begin{DoxyParamCaption}\item[{unsigned char}]{data }\end{DoxyParamCaption})}
+
+
+
+Send an (address$\vert$\+R/W) combination or a data byte over I2C. 
+
+\mbox{\label{twi__lib_8h_a95c4ba205513049cec14f6b6ece74e26}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!i2c\+Send\+Start@{i2c\+Send\+Start}}
+\index{i2c\+Send\+Start@{i2c\+Send\+Start}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{i2c\+Send\+Start()}
+{\footnotesize\ttfamily void i2c\+Send\+Start (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Send an I2C start condition in Master mode or repeated start condition. 
+
+\mbox{\label{twi__lib_8h_abd26726bed29632801d992d328e5e7e0}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!i2c\+Send\+Stop@{i2c\+Send\+Stop}}
+\index{i2c\+Send\+Stop@{i2c\+Send\+Stop}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{i2c\+Send\+Stop()}
+{\footnotesize\ttfamily uint8\+\_\+t i2c\+Send\+Stop (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Send an I2C stop condition in Master mode. 
+
+\mbox{\label{twi__lib_8h_ae3a41a077b9529ef656f38bb5a6ef494}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!i2c\+Set\+Bitrate@{i2c\+Set\+Bitrate}}
+\index{i2c\+Set\+Bitrate@{i2c\+Set\+Bitrate}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{i2c\+Set\+Bitrate()}
+{\footnotesize\ttfamily void i2c\+Set\+Bitrate (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{bitratek\+Hz }\end{DoxyParamCaption})}
+
+
+
+Set the I2C transaction bitrate (in K\+Hz) 
+
+\mbox{\label{twi__lib_8h_a1cb392a64f14da2002c7b09b1b8ddf33}} 
+\index{twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}!i2c\+Wait\+For\+Complete@{i2c\+Wait\+For\+Complete}}
+\index{i2c\+Wait\+For\+Complete@{i2c\+Wait\+For\+Complete}!twi\+\_\+lib.\+h@{twi\+\_\+lib.\+h}}
+\subsubsection{i2c\+Wait\+For\+Complete()}
+{\footnotesize\ttfamily uint8\+\_\+t i2c\+Wait\+For\+Complete (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Wait for current I2C operation to complete. 
+

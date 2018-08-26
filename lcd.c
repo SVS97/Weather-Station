@@ -5,6 +5,7 @@
 #include <util/delay.h>
 #include <avr/pgmspace.h>
 
+#define F_CPU 16000000UL
 #ifndef F_CPU
 #error "F_CPU not defined"
 #endif
@@ -33,19 +34,19 @@ static const unsigned char PROGMEM convert_HD44780[64] =
 
 //Custom functions for LCD, we use them in the program
 #if 1
-void LCDdata(uint8_t i)						//Sending a symbol for display
+void LCDdata(uint8_t i)						/* Sending a symbol for display					*/
 {
-	Busy_flag();	//Ñheck first the employment flag
-	CPORT|=(1<<RS); //RS = 1 send data to the LCD
+	Busy_flag();						/* Ñheck first the employment flag				*/
+	CPORT|=(1<<RS);						/* RS = 1 send data to the LCD 					*/
 	Send_byte(lcd_rus(i));
-	CPORT&=~(1<<RS);//RS=0
+	CPORT&=~(1<<RS);					/* RS=0 							*/
 }
-void LCDdataXY (uint8_t a, uint8_t b,uint8_t c)	//Display 1 character in the display in the X, Y position
+void LCDdataXY (uint8_t a, uint8_t b,uint8_t c)			/* Display 1 character in the display in the X, Y position	*/
 {
 	LCDGotoXY(b,c);
 	LCDdata(a);
 }
-void LCDGotoXY(uint8_t x,uint8_t y)			//Set cursor to X, Y position
+void LCDGotoXY(uint8_t x,uint8_t y)				/* Set cursor to X, Y position 					*/
 {
 	 uint8_t Address;
 	
@@ -60,7 +61,7 @@ void LCDGotoXY(uint8_t x,uint8_t y)			//Set cursor to X, Y position
 	
 	LCDcommand(1<<7 | Address);
 }
-void LCDstringXY(char *i,uint8_t x,uint8_t y) //Display a line in the display X, Y
+void LCDstringXY(char *i,uint8_t x,uint8_t y) 			/* Display a line in the display X, Y				*/
 {
 	LCDGotoXY(x,y);
 	while( *i )
@@ -68,7 +69,7 @@ void LCDstringXY(char *i,uint8_t x,uint8_t y) //Display a line in the display X,
 		LCDdata(*i++ );
 	}
 }
-void LCDsendString(char *s)//Display the line in the display
+void LCDsendString(char *s)					/* Display the line in the display 				*/
 {
 	while( *s )
 	{
@@ -100,18 +101,18 @@ void LCDstring_of_flashXY(const uint8_t *FlashLoc,uint8_t x,uint8_t y)
 		LCDdata((uint8_t)pgm_read_byte(&FlashLoc[i]));
 	}
 }
-void LCDinit(void)							//Initializing the display
+void LCDinit(void)							/* Initializing the display					*/
 {
-	//Before initializing the LCD, it is necessary to initiate a delay of 100 msec in the init, so that the power is set
+	/* Before initializing the LCD, it is necessary to initiate a delay of 100 msec in the init, so that the power is set	*/
 	_delay_ms(100);
-	CDDR |=  (1<<RS)|(1<<E)|(1<<RW);   //Configuring Ports 
-	CPORT&=~((1<<RS)|(1<<E)|(1<<RW));  //Configuring Ports 
-	OutPin();						   //Configuring Ports
+	CDDR |=  (1<<RS)|(1<<E)|(1<<RW);   				/* Configuring Ports						*/ 
+	CPORT&=~((1<<RS)|(1<<E)|(1<<RW));  				/* Configuring Ports 						*/ 
+	OutPin();							/* Configuring Ports 						*/
 	
 	uint8_t i=0;
 	while (i!=3)
 	{
-		#ifdef  LCD_8BIT       //character sending 0x30
+		#ifdef  LCD_8BIT       					/* character sending 0x30					*/
 		        DPORT|=(0<<DB7)|(0<<DB6)|(1<<DB5)|(1<<DB4)|(0<<DB3)|(0<<DB2)|(0<<DB1)|(0<<DB0);
 		#else
 				DPORT|=(0<<DB7)|(0<<DB6)|(1<<DB5)|(1<<DB4);
@@ -125,121 +126,121 @@ void LCDinit(void)							//Initializing the display
 	
 	
 	#ifdef  LCD_8BIT
-			LCDcommand(0b00111000);//8-bit interface, two lines, 5x8 pixels
-	#else   //The first time we send only the floor of the older tetrad
+			LCDcommand(0b00111000);				/* 8-bit interface, two lines, 5x8 pixels 				*/
+	#else   							/* The first time we send only the floor of the older tetrad 		*/
 			Busy_flag();
 			OutPin();
-			DPORT|=(0<<DB7)|(0<<DB6)|(1<<DB5)|(0<<DB4);//4-bit interface
+			DPORT|=(0<<DB7)|(0<<DB6)|(1<<DB5)|(0<<DB4);	/* 4-bit interface 							*/
 			Strob();
-			LCDcommand(0b00101000);//Two lines, 5x8 points
+			LCDcommand(0b00101000);				/* Two lines, 5x8 points 						*/
 	#endif
 	
-	LCDcommand(0b1100);  //Turn on the display + without displaying the cursors
-	LCDcommand(0b110);   //The address counter will always shift to n + 1
-	LCDcommand(0b10);    //Cursor to position 0.0 + reset all shifts
-	LCDcommand(0b1);     //Cleaning the display
+	LCDcommand(0b1100);  						/* Turn on the display + without displaying the cursors			*/
+	LCDcommand(0b110);   						/* The address counter will always shift to n + 1			*/
+	LCDcommand(0b10);   						/* Cursor to position 0.0 + reset all shifts				*/
+	LCDcommand(0b1);    						/* Cleaning the display 						*/
 	
 }
-void LCDblank(void)			//Make invisible information on the display
+void LCDblank(void)							/* Make invisible information on the display				*/
 {
 	LCDcommand(0b1000);
 }
-void LCDnblank(void)		//Make visible information in the display + turn off visible cursors
+void LCDnblank(void)							/* Make visible information in the display + turn off visible cursors 	*/
 {
 	LCDcommand(0b1100);
 }
-void LCDclear(void)			//Clear the display + cursor to position 0.0
+void LCDclear(void)							/* Clear the display + cursor to position 0.0				*/
 {
 	LCDcommand(0b1);
 }
-void LCDcursor_bl(void)		//Enable blinking cursor
+void LCDcursor_bl(void)							/* Enable blinking cursor 						*/
 {
 	LCDcommand(0b1101);
 }
-void LCDcursor_on(void)		//Enable underline cursor
+void LCDcursor_on(void)							/* Enable underline cursor 						*/
 {
 	LCDcommand(0b1110);
 }
-void LCDcursor_vi(void)		//Toggle both cursors
+void LCDcursor_vi(void)							/* Toggle both cursors 							*/
 {
 	LCDcommand(0b1111);
 }
-void LCDcursorOFF(void)		//Disable the cursor
+void LCDcursorOFF(void)							/* Disable the cursor 							*/
 {
 	LCDcommand(0b1100);
 }
-void LCDacr(void)			//The address counter will always shift to n + 1
+void LCDacr(void)							/* The address counter will always shift to n + 1 			*/
 {
 	LCDcommand(0b110);
 }
-void LCDacl(void)			//The address counter will always be shifted to n-1
-{
+void LCDacl(void)							/* The address counter will always be shifted to n-1 			*/
+{	
 	LCDcommand(0b100);
 }
-void LCDcursorl(void)		//Move the cursor to the left by 1
+void LCDcursorl(void)							/* Move the cursor to the left by 1 					*/
 {
 	LCDcommand(0b10000);
 }
-void LCDcursorr(void)		//Move the cursor to the right by 1
+void LCDcursorr(void)							/* Move the cursor to the right by 1 					*/
 {
 	LCDcommand(0b10100);
 }
-void LCDcursorln(uint8_t n)	//Move the cursor to the left with n symbols
+void LCDcursorln(uint8_t n)						/* Move the cursor to the left with n symbols				*/
 {
 	for (uint8_t i=0;i<n;i++)
 	{
 		LCDcommand(0b10000);
 	}
 }
-void LCDcursorrn(uint8_t n)	//Move the cursor to the right by n characters
+void LCDcursorrn(uint8_t n)						/* Move the cursor to the right by n characters				*/
 {
 	for (uint8_t i=0;i<n;i++)
 	{
 		LCDcommand(0b10100);
 	}
 }
-void LCDscreenl(void)		//Move the screen to the left by 1
+void LCDscreenl(void)							/* Move the screen to the left by 1					*/
 {
 	LCDcommand(0b11000);
 }
-void LCDscreenr(void)		//Move the screen to the right by 1
+void LCDscreenr(void)							/* Move the screen to the right by 1					*/
 {
 	LCDcommand(0b11100);
 }
-void LCDscreenln(uint8_t n)	//Move the screen to the left by n characters
+void LCDscreenln(uint8_t n)						/* Move the screen to the left by n characters 				*/
 {
 	for (uint8_t i=0;i<n;i++)
 	{
 		LCDcommand(0b11000);
 	}
 }
-void LCDscreenrn(uint8_t n)	//Move the screen to the right by n characters
+void LCDscreenrn(uint8_t n)						/* Move the screen to the right by n characters 			*/
 {
 	for (uint8_t i=0;i<n;i++)
 	{
 		LCDcommand(0b11100);
 	}
 }
-void LCDscreenL(void)		//With each new symbol, the screen will shift to the left
-{
+void LCDscreenL(void)							/* With each new symbol, the screen will shift to the left 		*/
+{		
 	LCDcommand(0b101);
 }
-void LCDscreenR(void)		//With each new symbol, the screen will shift to the right
+void LCDscreenR(void)							/* With each new symbol, the screen will shift to the right		*/
 {
 	LCDcommand(0b111);
 }
-void LCDresshift(void)      //Set cursor to position 0.0 + reset all shifts, the image remains
+void LCDresshift(void)      						/* Set cursor to position 0.0 + reset all shifts, the image remains 	*/
 {
 	LCDcommand(0b10);
 }
 
-//System functions
-static void LCDcommand(uint8_t i)	//Sending commands, setting the display
+/* System functions */
+static void LCDcommand(uint8_t i)					/* Sending commands, setting the display				*/
 {
 	Busy_flag();	
 	Send_byte(i);
 }
-static void Send_byte(uint8_t i)	//The transmission of LCD data is called by the functions Send_command and Send_data
+static void Send_byte(uint8_t i)					/* The transmission of LCD data is called by the functions Send_command and Send_data	*/
 {
 	OutPin();
 	
@@ -346,10 +347,10 @@ static void Send_byte(uint8_t i)	//The transmission of LCD data is called by the
 	
 	HiPin();
 }
-static void Busy_flag(void)		    //Checking Busy flag
+static void Busy_flag(void)		   			 /* Checking Busy flag			*/
 {
 	InPin();
-	CPORT|=(1<<RW);	  //R / W = 1 is read from the LCD
+	CPORT|=(1<<RW);	  					/* R / W = 1 is read from the LCD	*/
 	
 	#ifdef  LCD_8BIT
 			uint8_t i=1;
@@ -391,9 +392,9 @@ static void Busy_flag(void)		    //Checking Busy flag
 			}
 	#endif
 	
-	CPORT&=~(1<<RW);   //R/W=0 
+	CPORT&=~(1<<RW);   							/* R/W=0 					*/
 }
-static void HiPin(void)			    //Translate the port into the Hi state.
+static void HiPin(void)			    					/* Translate the port into the Hi state		*/
 {
 	#ifdef  LCD_8BIT
 			DDDR =0;
@@ -403,7 +404,7 @@ static void HiPin(void)			    //Translate the port into the Hi state.
 			DPORT&=~((1<<DB7)|(1<<DB6)|(1<<DB5)|(1<<DB4));
     #endif
 }
-static void OutPin(void)			// Translate the port to the output state.
+static void OutPin(void)							/* Translate the port to the output state	*/
 {
 	#ifdef  LCD_8BIT
 			DDDR =0xFF;
@@ -413,7 +414,7 @@ static void OutPin(void)			// Translate the port to the output state.
 			DPORT&=~((1<<DB7)|(1<<DB6)|(1<<DB5)|(1<<DB4));
 	#endif
 }
-static void InPin(void)			    //We translate the port to the input state
+static void InPin(void)			   					 /*We translate the port to the input state 	*/
 {
 	#ifdef  LCD_8BIT
 			DDDR =0;
@@ -440,28 +441,7 @@ static uint8_t lcd_rus(uint8_t c)
 
 	return c;
 }
-/*
-static void LCDset(void)			//Two-line display of 5x8 pixels
-{
-	LCDcommand(0b101000);
-}*/
-/*
-void LCDstring_of_sram(uint8_t* data,uint8_t nBytes,uint8_t x, uint8_t y)
-{
-	uint8_t i;
-	LCDGotoXY(x,y);
-	if (!data) 
-	{
-		return;
-	}
-	
-	for(i=0; i<nBytes; i++)
-	{
-		LCDdata(data[i]);
-	}
-	
-	
-}*/
+
 #endif
 
 /* LIBRARY FOR TRANSFER OF BINARY NUMBERS TO SYMBOLS AND CONCLUSIONS ON THE LCD */

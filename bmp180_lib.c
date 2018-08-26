@@ -321,7 +321,6 @@ int32_t bmp180ReadPressure(uint8_t* error_code)
 void bmp180Convert(int16_t BMP180_calibration_int16_t[],int16_t BMP180_calibration_uint16_t[],int32_t* temperature, int32_t* pressure, uint8_t* error_code)
 {
 
-	int8_t i;
 	int32_t ut=0;
 	int32_t up=0;
 	int32_t x1, x2, b5, b6, x3, b3, p;

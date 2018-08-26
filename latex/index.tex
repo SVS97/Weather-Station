@@ -1,0 +1,20 @@
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Viacheslav Stadnichuk 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+29.\+08.\+2018 
+\end{DoxyDate}
+\begin{DoxyWarning}{Warning}
+Prototype weather station, data is not correct 
+\end{DoxyWarning}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License 
+\end{DoxyCopyright}
+\section{Introduction}\label{index_intro_sec}
+This code developed for education aims, not for commercial using. It\textquotesingle{}s a graduation project GL C/\+Embedded Base\+Camp \section{Description}\label{index_desc}
+Weather station consist of two temperature and humidity sensors (D\+H\+T11 indoor, D\+H\+T22 outdoor), one barometer (B\+M\+P180 I2C) L\+CD display (1602A) and micro controller Arduino Uno. Code writing without using Arduino libraries (B\+A\+RE M\+E\+T\+AL A\+VR). Sensors interrogated every 30 seconds. States of display information changes every 30 seconds and with button help. Also weather station show current time (not accurate), time settings by button. A (very) simple weather station written in C for training purposes. The code is written for the purpose of acquaintance with timers, interrupts, buttons, display and different sensors. Seconds are counted in the interrupt timer. The time setting is done using two buttons. Thanks for helping . \section{Compilation}\label{index_compile_sec}
+Project compiles with Makefile help (make all). \section{Prototype Example}\label{index_prot}
+ 

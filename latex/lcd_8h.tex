@@ -1,0 +1,495 @@
+\section{lcd.\+h File Reference}
+\label{lcd_8h}\index{lcd.\+h@{lcd.\+h}}
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ D\+P\+IN}~P\+I\+ND
+\item 
+\#define \textbf{ D\+D\+DR}~D\+D\+RD
+\item 
+\#define \textbf{ D\+P\+O\+RT}~P\+O\+R\+TD
+\item 
+\#define \textbf{ D\+B0}~0
+\item 
+\#define \textbf{ D\+B1}~1
+\item 
+\#define \textbf{ D\+B2}~2
+\item 
+\#define \textbf{ D\+B3}~3
+\item 
+\#define \textbf{ D\+B4}~7
+\item 
+\#define \textbf{ D\+B5}~6
+\item 
+\#define \textbf{ D\+B6}~5
+\item 
+\#define \textbf{ D\+B7}~4
+\item 
+\#define \textbf{ C\+D\+DR}~D\+D\+RB
+\item 
+\#define \textbf{ C\+P\+O\+RT}~P\+O\+R\+TB
+\item 
+\#define \textbf{ E}~0
+\item 
+\#define \textbf{ RW}~2   	/$\ast$ R/W		R / W = 1 is read from the L\+CD, R / W = 0 is written in the L\+CD		$\ast$/
+\item 
+\#define \textbf{ RS}~1 	/$\ast$ RS		RS = 0 send the command to the L\+CD, RS = 1 send the data to the L\+CD	$\ast$/
+\item 
+\#define \textbf{ L\+I\+N\+E0}~0x00
+\item 
+\#define \textbf{ L\+I\+N\+E1}~0x40
+\item 
+\#define \textbf{ B\+C\+D\+\_\+\+Send\+Data}(data)~/$\ast$ L\+C\+D\+\_\+\+Write\+Data(data) $\ast$/
+\item 
+\#define \textbf{ M\+I\+R\+R\+O\+R\+\_\+\+N\+U\+LL}
+\item 
+\#define \textbf{ B\+C\+D\+\_\+\+U\+S\+E\+\_\+\+B\+UF}
+\item 
+\#define \textbf{ B\+C\+D\+\_\+\+S\+YM}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ L\+C\+D\+Goto\+XY} (uint8\+\_\+t, uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Ddata} (uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Ddata\+XY} (uint8\+\_\+t, uint8\+\_\+t, uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Dsend\+String} (char $\ast$)
+\item 
+void \textbf{ L\+C\+Dstring\+XY} (char $\ast$, uint8\+\_\+t, uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Dstring\+\_\+of\+\_\+sram\+XY} (uint8\+\_\+t $\ast$, uint8\+\_\+t, uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Dstring\+\_\+of\+\_\+flash\+XY} (const uint8\+\_\+t $\ast$, uint8\+\_\+t, uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Dinit} (void)
+\item 
+void \textbf{ L\+C\+Dblank} (void)
+\item 
+void \textbf{ L\+C\+Dnblank} (void)
+\item 
+void \textbf{ L\+C\+Dclear} (void)
+\item 
+void \textbf{ L\+C\+Dcursor\+\_\+bl} (void)
+\item 
+void \textbf{ L\+C\+Dcursor\+\_\+on} (void)
+\item 
+void \textbf{ L\+C\+Dcursor\+\_\+vi} (void)
+\item 
+void \textbf{ L\+C\+Dcursor\+O\+FF} (void)
+\item 
+void \textbf{ L\+C\+Dacr} (void)
+\item 
+void \textbf{ L\+C\+Dacl} (void)
+\item 
+void \textbf{ L\+C\+Dcursorl} (void)
+\item 
+void \textbf{ L\+C\+Dcursorr} (void)
+\item 
+void \textbf{ L\+C\+Dcursorln} (uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Dcursorrn} (uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Dscreenl} (void)
+\item 
+void \textbf{ L\+C\+Dscreenr} (void)
+\item 
+void \textbf{ L\+C\+Dscreenln} (uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+Dscreenrn} (uint8\+\_\+t)
+\item 
+void \textbf{ L\+C\+DscreenL} (void)
+\item 
+void \textbf{ L\+C\+DscreenR} (void)
+\item 
+void \textbf{ L\+C\+Dresshift} (void)
+\item 
+char $\ast$ \textbf{ B\+C\+D\+\_\+\+Get\+Pointer\+Buf} (void)
+\item 
+void \textbf{ B\+C\+D\+\_\+1} (uint8\+\_\+t value)
+\item 
+void \textbf{ B\+C\+D\+\_\+2} (uint8\+\_\+t value)
+\item 
+void \textbf{ B\+C\+D\+\_\+3} (uint8\+\_\+t value)
+\item 
+void \textbf{ B\+C\+D\+\_\+3\+Int} (uint16\+\_\+t value)
+\item 
+void \textbf{ B\+C\+D\+\_\+4\+Int} (uint16\+\_\+t value)
+\item 
+void \textbf{ B\+C\+D\+\_\+5\+Int} (uint16\+\_\+t value)
+\item 
+void \textbf{ B\+C\+D\+\_\+\+Uchar} (uint8\+\_\+t value)
+\item 
+void \textbf{ B\+C\+D\+\_\+\+Uint} (uint16\+\_\+t value)
+\item 
+void \textbf{ B\+C\+D\+\_\+\+Ulong} (uint32\+\_\+t value)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{lcd_8h_af37894aa9343439b64d5b5c0d0cc7f09}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+\+Send\+Data@{B\+C\+D\+\_\+\+Send\+Data}}
+\index{B\+C\+D\+\_\+\+Send\+Data@{B\+C\+D\+\_\+\+Send\+Data}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+\+Send\+Data}
+{\footnotesize\ttfamily \#define B\+C\+D\+\_\+\+Send\+Data(\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})~/$\ast$ L\+C\+D\+\_\+\+Write\+Data(data) $\ast$/}
+
+\mbox{\label{lcd_8h_a9a0c5b8aef1342cb554ca3b64fbb1887}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+\+S\+YM@{B\+C\+D\+\_\+\+S\+YM}}
+\index{B\+C\+D\+\_\+\+S\+YM@{B\+C\+D\+\_\+\+S\+YM}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+\+S\+YM}
+{\footnotesize\ttfamily \#define B\+C\+D\+\_\+\+S\+YM}
+
+\mbox{\label{lcd_8h_a63408dce6ac479590f8ced86dd74750c}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+\+U\+S\+E\+\_\+\+B\+UF@{B\+C\+D\+\_\+\+U\+S\+E\+\_\+\+B\+UF}}
+\index{B\+C\+D\+\_\+\+U\+S\+E\+\_\+\+B\+UF@{B\+C\+D\+\_\+\+U\+S\+E\+\_\+\+B\+UF}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+\+U\+S\+E\+\_\+\+B\+UF}
+{\footnotesize\ttfamily \#define B\+C\+D\+\_\+\+U\+S\+E\+\_\+\+B\+UF}
+
+\mbox{\label{lcd_8h_a0e455aafdb587b523145da7cfe0c0590}} 
+\index{lcd.\+h@{lcd.\+h}!C\+D\+DR@{C\+D\+DR}}
+\index{C\+D\+DR@{C\+D\+DR}!lcd.\+h@{lcd.\+h}}
+\subsubsection{C\+D\+DR}
+{\footnotesize\ttfamily \#define C\+D\+DR~D\+D\+RB}
+
+\mbox{\label{lcd_8h_a7af85529f60654cb8d34f973b26056a8}} 
+\index{lcd.\+h@{lcd.\+h}!C\+P\+O\+RT@{C\+P\+O\+RT}}
+\index{C\+P\+O\+RT@{C\+P\+O\+RT}!lcd.\+h@{lcd.\+h}}
+\subsubsection{C\+P\+O\+RT}
+{\footnotesize\ttfamily \#define C\+P\+O\+RT~P\+O\+R\+TB}
+
+\mbox{\label{lcd_8h_a7fb2320006ef97210b8a71a4b198f192}} 
+\index{lcd.\+h@{lcd.\+h}!D\+B0@{D\+B0}}
+\index{D\+B0@{D\+B0}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+B0}
+{\footnotesize\ttfamily \#define D\+B0~0}
+
+\mbox{\label{lcd_8h_a6a7466f04265d1e1ff3e7679520afb27}} 
+\index{lcd.\+h@{lcd.\+h}!D\+B1@{D\+B1}}
+\index{D\+B1@{D\+B1}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+B1}
+{\footnotesize\ttfamily \#define D\+B1~1}
+
+\mbox{\label{lcd_8h_af49c92efa1dd95147166683688a59a4e}} 
+\index{lcd.\+h@{lcd.\+h}!D\+B2@{D\+B2}}
+\index{D\+B2@{D\+B2}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+B2}
+{\footnotesize\ttfamily \#define D\+B2~2}
+
+\mbox{\label{lcd_8h_a765256cd986c073fd4521f361d53859a}} 
+\index{lcd.\+h@{lcd.\+h}!D\+B3@{D\+B3}}
+\index{D\+B3@{D\+B3}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+B3}
+{\footnotesize\ttfamily \#define D\+B3~3}
+
+\mbox{\label{lcd_8h_acdecad1b5b1abdca1ba50a47addef513}} 
+\index{lcd.\+h@{lcd.\+h}!D\+B4@{D\+B4}}
+\index{D\+B4@{D\+B4}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+B4}
+{\footnotesize\ttfamily \#define D\+B4~7}
+
+\mbox{\label{lcd_8h_ac0f7c08c3e95bbb41632e415e6b3f001}} 
+\index{lcd.\+h@{lcd.\+h}!D\+B5@{D\+B5}}
+\index{D\+B5@{D\+B5}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+B5}
+{\footnotesize\ttfamily \#define D\+B5~6}
+
+\mbox{\label{lcd_8h_ad9cc200e9e406247bd374e44947f2aec}} 
+\index{lcd.\+h@{lcd.\+h}!D\+B6@{D\+B6}}
+\index{D\+B6@{D\+B6}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+B6}
+{\footnotesize\ttfamily \#define D\+B6~5}
+
+\mbox{\label{lcd_8h_acf475e70fa2ffe31079a07ba7ae18116}} 
+\index{lcd.\+h@{lcd.\+h}!D\+B7@{D\+B7}}
+\index{D\+B7@{D\+B7}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+B7}
+{\footnotesize\ttfamily \#define D\+B7~4}
+
+\mbox{\label{lcd_8h_a2fcf003134dc590da4aa010aa86bd849}} 
+\index{lcd.\+h@{lcd.\+h}!D\+D\+DR@{D\+D\+DR}}
+\index{D\+D\+DR@{D\+D\+DR}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+D\+DR}
+{\footnotesize\ttfamily \#define D\+D\+DR~D\+D\+RD}
+
+\mbox{\label{lcd_8h_a071a389dc63a2a45fe3051e3beae10d3}} 
+\index{lcd.\+h@{lcd.\+h}!D\+P\+IN@{D\+P\+IN}}
+\index{D\+P\+IN@{D\+P\+IN}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+P\+IN}
+{\footnotesize\ttfamily \#define D\+P\+IN~P\+I\+ND}
+
+\mbox{\label{lcd_8h_a31549447999c751746a53ca9286653ff}} 
+\index{lcd.\+h@{lcd.\+h}!D\+P\+O\+RT@{D\+P\+O\+RT}}
+\index{D\+P\+O\+RT@{D\+P\+O\+RT}!lcd.\+h@{lcd.\+h}}
+\subsubsection{D\+P\+O\+RT}
+{\footnotesize\ttfamily \#define D\+P\+O\+RT~P\+O\+R\+TD}
+
+\mbox{\label{lcd_8h_a07484107e6d9fdf38b53edf631d6511d}} 
+\index{lcd.\+h@{lcd.\+h}!E@{E}}
+\index{E@{E}!lcd.\+h@{lcd.\+h}}
+\subsubsection{E}
+{\footnotesize\ttfamily \#define E~0}
+
+\mbox{\label{lcd_8h_a30ae842a69e31024b0577c01ba644056}} 
+\index{lcd.\+h@{lcd.\+h}!L\+I\+N\+E0@{L\+I\+N\+E0}}
+\index{L\+I\+N\+E0@{L\+I\+N\+E0}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+I\+N\+E0}
+{\footnotesize\ttfamily \#define L\+I\+N\+E0~0x00}
+
+\mbox{\label{lcd_8h_a4c0102b3d63c7bd2d59a424ca3815ad1}} 
+\index{lcd.\+h@{lcd.\+h}!L\+I\+N\+E1@{L\+I\+N\+E1}}
+\index{L\+I\+N\+E1@{L\+I\+N\+E1}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+I\+N\+E1}
+{\footnotesize\ttfamily \#define L\+I\+N\+E1~0x40}
+
+\mbox{\label{lcd_8h_a6da1e915279359c106dd4f6a0d721ac5}} 
+\index{lcd.\+h@{lcd.\+h}!M\+I\+R\+R\+O\+R\+\_\+\+N\+U\+LL@{M\+I\+R\+R\+O\+R\+\_\+\+N\+U\+LL}}
+\index{M\+I\+R\+R\+O\+R\+\_\+\+N\+U\+LL@{M\+I\+R\+R\+O\+R\+\_\+\+N\+U\+LL}!lcd.\+h@{lcd.\+h}}
+\subsubsection{M\+I\+R\+R\+O\+R\+\_\+\+N\+U\+LL}
+{\footnotesize\ttfamily \#define M\+I\+R\+R\+O\+R\+\_\+\+N\+U\+LL}
+
+\mbox{\label{lcd_8h_af8903d8eea3868940c60af887473b152}} 
+\index{lcd.\+h@{lcd.\+h}!RS@{RS}}
+\index{RS@{RS}!lcd.\+h@{lcd.\+h}}
+\subsubsection{RS}
+{\footnotesize\ttfamily \#define RS~1 	/$\ast$ RS		RS = 0 send the command to the L\+CD, RS = 1 send the data to the L\+CD	$\ast$/}
+
+\mbox{\label{lcd_8h_afc4ded33ac0ca43defcce639e965748a}} 
+\index{lcd.\+h@{lcd.\+h}!RW@{RW}}
+\index{RW@{RW}!lcd.\+h@{lcd.\+h}}
+\subsubsection{RW}
+{\footnotesize\ttfamily \#define RW~2   	/$\ast$ R/W		R / W = 1 is read from the L\+CD, R / W = 0 is written in the L\+CD		$\ast$/}
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{lcd_8h_a96dad2021433be8a2a64085cfa4132b0}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+1@{B\+C\+D\+\_\+1}}
+\index{B\+C\+D\+\_\+1@{B\+C\+D\+\_\+1}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+1()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+1 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a5d6d939f94e00c827e9be235c12e458f}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+2@{B\+C\+D\+\_\+2}}
+\index{B\+C\+D\+\_\+2@{B\+C\+D\+\_\+2}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+2()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+2 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_ab69e11ffc7dd32db82ce7c6f6572b03c}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+3@{B\+C\+D\+\_\+3}}
+\index{B\+C\+D\+\_\+3@{B\+C\+D\+\_\+3}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+3()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+3 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_ac90bf7d17031c7d3c47b68e80fb251be}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+3\+Int@{B\+C\+D\+\_\+3\+Int}}
+\index{B\+C\+D\+\_\+3\+Int@{B\+C\+D\+\_\+3\+Int}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+3\+Int()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+3\+Int (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a67578ffcce8e8fd0199734024cca71a8}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+4\+Int@{B\+C\+D\+\_\+4\+Int}}
+\index{B\+C\+D\+\_\+4\+Int@{B\+C\+D\+\_\+4\+Int}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+4\+Int()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+4\+Int (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a19df9ccc086e0e23a07026bb020fec6c}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+5\+Int@{B\+C\+D\+\_\+5\+Int}}
+\index{B\+C\+D\+\_\+5\+Int@{B\+C\+D\+\_\+5\+Int}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+5\+Int()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+5\+Int (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a60922d87234dfcc4050e1cde674d3c1c}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+\+Get\+Pointer\+Buf@{B\+C\+D\+\_\+\+Get\+Pointer\+Buf}}
+\index{B\+C\+D\+\_\+\+Get\+Pointer\+Buf@{B\+C\+D\+\_\+\+Get\+Pointer\+Buf}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+\+Get\+Pointer\+Buf()}
+{\footnotesize\ttfamily char$\ast$ B\+C\+D\+\_\+\+Get\+Pointer\+Buf (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a6f9c47cbcd978ebbb1e443d94ceda26e}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+\+Uchar@{B\+C\+D\+\_\+\+Uchar}}
+\index{B\+C\+D\+\_\+\+Uchar@{B\+C\+D\+\_\+\+Uchar}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+\+Uchar()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+\+Uchar (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a83b2b2a5de3a2efff61432f60b1aaffc}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+\+Uint@{B\+C\+D\+\_\+\+Uint}}
+\index{B\+C\+D\+\_\+\+Uint@{B\+C\+D\+\_\+\+Uint}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+\+Uint()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+\+Uint (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a2a94ac620ddde4753e24822d6841a851}} 
+\index{lcd.\+h@{lcd.\+h}!B\+C\+D\+\_\+\+Ulong@{B\+C\+D\+\_\+\+Ulong}}
+\index{B\+C\+D\+\_\+\+Ulong@{B\+C\+D\+\_\+\+Ulong}!lcd.\+h@{lcd.\+h}}
+\subsubsection{B\+C\+D\+\_\+\+Ulong()}
+{\footnotesize\ttfamily void B\+C\+D\+\_\+\+Ulong (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_ab6928d673710c2a0c303f7bfc9bd4063}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dacl@{L\+C\+Dacl}}
+\index{L\+C\+Dacl@{L\+C\+Dacl}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dacl()}
+{\footnotesize\ttfamily void L\+C\+Dacl (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_af8aaaaafb14508ca30208b125db7c7ca}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dacr@{L\+C\+Dacr}}
+\index{L\+C\+Dacr@{L\+C\+Dacr}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dacr()}
+{\footnotesize\ttfamily void L\+C\+Dacr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_afd9beebeb1deace8cc626fa140e01e29}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dblank@{L\+C\+Dblank}}
+\index{L\+C\+Dblank@{L\+C\+Dblank}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dblank()}
+{\footnotesize\ttfamily void L\+C\+Dblank (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a28e765a7041cb850f82f1e7b36ef4898}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dclear@{L\+C\+Dclear}}
+\index{L\+C\+Dclear@{L\+C\+Dclear}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dclear()}
+{\footnotesize\ttfamily void L\+C\+Dclear (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_afdd0a6f1ec6a096553bf3172c0a8eb53}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dcursor\+\_\+bl@{L\+C\+Dcursor\+\_\+bl}}
+\index{L\+C\+Dcursor\+\_\+bl@{L\+C\+Dcursor\+\_\+bl}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dcursor\+\_\+bl()}
+{\footnotesize\ttfamily void L\+C\+Dcursor\+\_\+bl (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a7a7b0f766f8bcc06b5b9e444ba9361b7}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dcursor\+\_\+on@{L\+C\+Dcursor\+\_\+on}}
+\index{L\+C\+Dcursor\+\_\+on@{L\+C\+Dcursor\+\_\+on}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dcursor\+\_\+on()}
+{\footnotesize\ttfamily void L\+C\+Dcursor\+\_\+on (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a99bb73b2e5d4688dbf86f2d5aaa87484}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dcursor\+\_\+vi@{L\+C\+Dcursor\+\_\+vi}}
+\index{L\+C\+Dcursor\+\_\+vi@{L\+C\+Dcursor\+\_\+vi}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dcursor\+\_\+vi()}
+{\footnotesize\ttfamily void L\+C\+Dcursor\+\_\+vi (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_ae52e7cbae1b62045eb7c97e0751da460}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dcursorl@{L\+C\+Dcursorl}}
+\index{L\+C\+Dcursorl@{L\+C\+Dcursorl}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dcursorl()}
+{\footnotesize\ttfamily void L\+C\+Dcursorl (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a5f28989546790c031c97abbb3063ec21}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dcursorln@{L\+C\+Dcursorln}}
+\index{L\+C\+Dcursorln@{L\+C\+Dcursorln}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dcursorln()}
+{\footnotesize\ttfamily void L\+C\+Dcursorln (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_aceae492825d39eec0d2497f6072b1740}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dcursor\+O\+FF@{L\+C\+Dcursor\+O\+FF}}
+\index{L\+C\+Dcursor\+O\+FF@{L\+C\+Dcursor\+O\+FF}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dcursor\+O\+F\+F()}
+{\footnotesize\ttfamily void L\+C\+Dcursor\+O\+FF (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a4bea2eb4679aa54a409489209e86c5c1}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dcursorr@{L\+C\+Dcursorr}}
+\index{L\+C\+Dcursorr@{L\+C\+Dcursorr}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dcursorr()}
+{\footnotesize\ttfamily void L\+C\+Dcursorr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_ab56a63fef56c29a00c8a509600e73d22}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dcursorrn@{L\+C\+Dcursorrn}}
+\index{L\+C\+Dcursorrn@{L\+C\+Dcursorrn}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dcursorrn()}
+{\footnotesize\ttfamily void L\+C\+Dcursorrn (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_aef4aba080806aee7767a9a522c828d3f}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Ddata@{L\+C\+Ddata}}
+\index{L\+C\+Ddata@{L\+C\+Ddata}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Ddata()}
+{\footnotesize\ttfamily void L\+C\+Ddata (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_aedb2ca46842f10b0da1ffbfb881bdf50}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Ddata\+XY@{L\+C\+Ddata\+XY}}
+\index{L\+C\+Ddata\+XY@{L\+C\+Ddata\+XY}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Ddata\+X\+Y()}
+{\footnotesize\ttfamily void L\+C\+Ddata\+XY (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{,  }\item[{uint8\+\_\+t}]{,  }\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a75e4daec37f91765779baf65ee85a272}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+D\+Goto\+XY@{L\+C\+D\+Goto\+XY}}
+\index{L\+C\+D\+Goto\+XY@{L\+C\+D\+Goto\+XY}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+D\+Goto\+X\+Y()}
+{\footnotesize\ttfamily void L\+C\+D\+Goto\+XY (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{,  }\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a6d4b16809305b1f89cff88c00862a12e}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dinit@{L\+C\+Dinit}}
+\index{L\+C\+Dinit@{L\+C\+Dinit}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dinit()}
+{\footnotesize\ttfamily void L\+C\+Dinit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_af944fa7a2c586706fd6320c098ecff9a}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dnblank@{L\+C\+Dnblank}}
+\index{L\+C\+Dnblank@{L\+C\+Dnblank}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dnblank()}
+{\footnotesize\ttfamily void L\+C\+Dnblank (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a0b68e2e9aa9dbaac6621c49e500f221e}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dresshift@{L\+C\+Dresshift}}
+\index{L\+C\+Dresshift@{L\+C\+Dresshift}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dresshift()}
+{\footnotesize\ttfamily void L\+C\+Dresshift (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_ac784186a6399b26152962744c0a313e0}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dscreenl@{L\+C\+Dscreenl}}
+\index{L\+C\+Dscreenl@{L\+C\+Dscreenl}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dscreenl()}
+{\footnotesize\ttfamily void L\+C\+Dscreenl (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_abf04707c239b9f47ebf71b754130b6a8}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+DscreenL@{L\+C\+DscreenL}}
+\index{L\+C\+DscreenL@{L\+C\+DscreenL}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dscreen\+L()}
+{\footnotesize\ttfamily void L\+C\+DscreenL (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a81b70cb64d13c3a195a5f57416b7d98c}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dscreenln@{L\+C\+Dscreenln}}
+\index{L\+C\+Dscreenln@{L\+C\+Dscreenln}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dscreenln()}
+{\footnotesize\ttfamily void L\+C\+Dscreenln (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a724ac0845f7d9f796cb6dd76720ba02a}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dscreenr@{L\+C\+Dscreenr}}
+\index{L\+C\+Dscreenr@{L\+C\+Dscreenr}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dscreenr()}
+{\footnotesize\ttfamily void L\+C\+Dscreenr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a0a2ea7dcbd033ca160b8dfb8c824bbc9}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+DscreenR@{L\+C\+DscreenR}}
+\index{L\+C\+DscreenR@{L\+C\+DscreenR}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dscreen\+R()}
+{\footnotesize\ttfamily void L\+C\+DscreenR (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_aed79e576a314eccf11121c9a27653d0e}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dscreenrn@{L\+C\+Dscreenrn}}
+\index{L\+C\+Dscreenrn@{L\+C\+Dscreenrn}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dscreenrn()}
+{\footnotesize\ttfamily void L\+C\+Dscreenrn (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_aebd3aa2c5db18ac44c99161e8aa8f567}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dsend\+String@{L\+C\+Dsend\+String}}
+\index{L\+C\+Dsend\+String@{L\+C\+Dsend\+String}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dsend\+String()}
+{\footnotesize\ttfamily void L\+C\+Dsend\+String (\begin{DoxyParamCaption}\item[{char $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a8d584bbd3fb4ae5b9273c367a380166a}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dstring\+\_\+of\+\_\+flash\+XY@{L\+C\+Dstring\+\_\+of\+\_\+flash\+XY}}
+\index{L\+C\+Dstring\+\_\+of\+\_\+flash\+XY@{L\+C\+Dstring\+\_\+of\+\_\+flash\+XY}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dstring\+\_\+of\+\_\+flash\+X\+Y()}
+{\footnotesize\ttfamily void L\+C\+Dstring\+\_\+of\+\_\+flash\+XY (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{,  }\item[{uint8\+\_\+t}]{,  }\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a2ce021ecffcb6598a70481c2dd98b6a8}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dstring\+\_\+of\+\_\+sram\+XY@{L\+C\+Dstring\+\_\+of\+\_\+sram\+XY}}
+\index{L\+C\+Dstring\+\_\+of\+\_\+sram\+XY@{L\+C\+Dstring\+\_\+of\+\_\+sram\+XY}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dstring\+\_\+of\+\_\+sram\+X\+Y()}
+{\footnotesize\ttfamily void L\+C\+Dstring\+\_\+of\+\_\+sram\+XY (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{,  }\item[{uint8\+\_\+t}]{,  }\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a08ebc8e14d0c6213c708b1eb92ec9ec7}} 
+\index{lcd.\+h@{lcd.\+h}!L\+C\+Dstring\+XY@{L\+C\+Dstring\+XY}}
+\index{L\+C\+Dstring\+XY@{L\+C\+Dstring\+XY}!lcd.\+h@{lcd.\+h}}
+\subsubsection{L\+C\+Dstring\+X\+Y()}
+{\footnotesize\ttfamily void L\+C\+Dstring\+XY (\begin{DoxyParamCaption}\item[{char $\ast$}]{,  }\item[{uint8\+\_\+t}]{,  }\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})}
+

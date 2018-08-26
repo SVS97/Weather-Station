@@ -1,0 +1,152 @@
+\section{bmp180\+\_\+lib.\+h File Reference}
+\label{bmp180__lib_8h}\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$util/delay.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$util/twi.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ F\+\_\+\+C\+PU}~16000000\+UL
+\item 
+\#define \textbf{ O\+SS}~3
+\begin{DoxyCompactList}\small\item\em Accuracy mode. \end{DoxyCompactList}\item 
+\#define \textbf{ B\+M\+P180\+\_\+R}~0x\+EF
+\begin{DoxyCompactList}\small\item\em Read from sensor. \end{DoxyCompactList}\item 
+\#define \textbf{ B\+M\+P180\+\_\+W}~0x\+EE
+\begin{DoxyCompactList}\small\item\em Write to sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ B\+M\+P180\+\_\+\+Calibration} (int16\+\_\+t B\+M\+P180\+\_\+calibration\+\_\+int16\+\_\+t[$\,$], int16\+\_\+t B\+M\+P180\+\_\+calibration\+\_\+uint16\+\_\+t[$\,$], uint8\+\_\+t $\ast$errorcode)
+\begin{DoxyCompactList}\small\item\em Calibration sensor. \end{DoxyCompactList}\item 
+uint16\+\_\+t \textbf{ bmp180\+Read\+Short} (uint8\+\_\+t address, uint8\+\_\+t $\ast$errorcode)
+\item 
+int32\+\_\+t \textbf{ bmp180\+Read\+Temp} (uint8\+\_\+t $\ast$\textbf{ error\+\_\+code})
+\item 
+int32\+\_\+t \textbf{ bmp180\+Read\+Pressure} (uint8\+\_\+t $\ast$errorcode)
+\item 
+void \textbf{ bmp180\+Convert} (int16\+\_\+t B\+M\+P180\+\_\+calibration\+\_\+int16\+\_\+t[$\,$], int16\+\_\+t B\+M\+P180\+\_\+calibration\+\_\+uint16\+\_\+t[$\,$], int32\+\_\+t $\ast$\textbf{ temperature}, int32\+\_\+t $\ast$\textbf{ pressure}, uint8\+\_\+t $\ast$\textbf{ error\+\_\+code})
+\begin{DoxyCompactList}\small\item\em Convert and displaying values from B\+M\+P180. \end{DoxyCompactList}\item 
+int32\+\_\+t \textbf{ bmp180\+Calc\+Altitude} (int32\+\_\+t \textbf{ pressure})
+\begin{DoxyCompactList}\small\item\em Calculating altitude (Height above sea level) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{bmp180__lib_8h_abe0923d608536d2c003fa3025a9deafb}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!B\+M\+P180\+\_\+R@{B\+M\+P180\+\_\+R}}
+\index{B\+M\+P180\+\_\+R@{B\+M\+P180\+\_\+R}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{B\+M\+P180\+\_\+R}
+{\footnotesize\ttfamily \#define B\+M\+P180\+\_\+R~0x\+EF}
+
+
+
+Read from sensor. 
+
+\mbox{\label{bmp180__lib_8h_ac480e84c66767fe1397b5c8dccf7b36d}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!B\+M\+P180\+\_\+W@{B\+M\+P180\+\_\+W}}
+\index{B\+M\+P180\+\_\+W@{B\+M\+P180\+\_\+W}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{B\+M\+P180\+\_\+W}
+{\footnotesize\ttfamily \#define B\+M\+P180\+\_\+W~0x\+EE}
+
+
+
+Write to sensor. 
+
+\mbox{\label{bmp180__lib_8h_a43bafb28b29491ec7f871319b5a3b2f8}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!F\+\_\+\+C\+PU@{F\+\_\+\+C\+PU}}
+\index{F\+\_\+\+C\+PU@{F\+\_\+\+C\+PU}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{F\+\_\+\+C\+PU}
+{\footnotesize\ttfamily \#define F\+\_\+\+C\+PU~16000000\+UL}
+
+\mbox{\label{bmp180__lib_8h_a787dcec9c06363bc7354929f79ec6440}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!O\+SS@{O\+SS}}
+\index{O\+SS@{O\+SS}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{O\+SS}
+{\footnotesize\ttfamily \#define O\+SS~3}
+
+
+
+Accuracy mode. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{bmp180__lib_8h_ad96ebd71d1c58702c149e8b0a9c1579c}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!B\+M\+P180\+\_\+\+Calibration@{B\+M\+P180\+\_\+\+Calibration}}
+\index{B\+M\+P180\+\_\+\+Calibration@{B\+M\+P180\+\_\+\+Calibration}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{B\+M\+P180\+\_\+\+Calibration()}
+{\footnotesize\ttfamily void B\+M\+P180\+\_\+\+Calibration (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{B\+M\+P180\+\_\+calibration\+\_\+int16\+\_\+t[$\,$],  }\item[{int16\+\_\+t}]{B\+M\+P180\+\_\+calibration\+\_\+uint16\+\_\+t[$\,$],  }\item[{uint8\+\_\+t $\ast$}]{errorcode }\end{DoxyParamCaption})}
+
+
+
+Calibration sensor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em B\+M\+P180\+\_\+calibration\+\_\+int16\+\_\+t} & \+: Calibration coefficients for pressure \\
+\hline
+\mbox{\tt in}  & {\em B\+M\+P180\+\_\+calibration\+\_\+uint16\+\_\+t} & \+: Calibration coefficients for temperature \\
+\hline
+\mbox{\tt in}  & {\em $\ast$errorcode} & \+: Code of error transmitted by pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\label{bmp180__lib_8h_af5a0b907bd4f1c0e819df9432a486e2b}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!bmp180\+Calc\+Altitude@{bmp180\+Calc\+Altitude}}
+\index{bmp180\+Calc\+Altitude@{bmp180\+Calc\+Altitude}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{bmp180\+Calc\+Altitude()}
+{\footnotesize\ttfamily int32\+\_\+t bmp180\+Calc\+Altitude (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{pressure }\end{DoxyParamCaption})}
+
+
+
+Calculating altitude (Height above sea level) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em $\ast$pressure} & \+: pressure transmitted by pointer \\
+\hline
+\mbox{\tt out}  & {\em altitude} & \+: calculating altitude \\
+\hline
+\end{DoxyParams}
+\mbox{\label{bmp180__lib_8h_a17c5a9189dde69ab1401628dc4775095}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!bmp180\+Convert@{bmp180\+Convert}}
+\index{bmp180\+Convert@{bmp180\+Convert}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{bmp180\+Convert()}
+{\footnotesize\ttfamily void bmp180\+Convert (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{B\+M\+P180\+\_\+calibration\+\_\+int16\+\_\+t[$\,$],  }\item[{int16\+\_\+t}]{B\+M\+P180\+\_\+calibration\+\_\+uint16\+\_\+t[$\,$],  }\item[{int32\+\_\+t $\ast$}]{temperature,  }\item[{int32\+\_\+t $\ast$}]{pressure,  }\item[{uint8\+\_\+t $\ast$}]{error\+\_\+code }\end{DoxyParamCaption})}
+
+
+
+Convert and displaying values from B\+M\+P180. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em B\+M\+P180\+\_\+calibration\+\_\+int16\+\_\+t} & \+: Calibration coefficients for pressure \\
+\hline
+\mbox{\tt in}  & {\em B\+M\+P180\+\_\+calibration\+\_\+uint16\+\_\+t} & \+: Calibration coefficients for temperature \\
+\hline
+\mbox{\tt in}  & {\em $\ast$errorcode} & \+: Code of error transmitted by pointer \\
+\hline
+\mbox{\tt in}  & {\em $\ast$temperature} & \+: temperature from D\+H\+T180 transmitted by pounter \\
+\hline
+\mbox{\tt in}  & {\em $\ast$pressure} & \+: pressure transmitted by pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\label{bmp180__lib_8h_a450561e21ae1992359fdcb0d6582fa48}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!bmp180\+Read\+Pressure@{bmp180\+Read\+Pressure}}
+\index{bmp180\+Read\+Pressure@{bmp180\+Read\+Pressure}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{bmp180\+Read\+Pressure()}
+{\footnotesize\ttfamily int32\+\_\+t bmp180\+Read\+Pressure (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{errorcode }\end{DoxyParamCaption})}
+
+\mbox{\label{bmp180__lib_8h_abf0a61ad8c02218c6240a68934924c4e}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!bmp180\+Read\+Short@{bmp180\+Read\+Short}}
+\index{bmp180\+Read\+Short@{bmp180\+Read\+Short}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{bmp180\+Read\+Short()}
+{\footnotesize\ttfamily uint16\+\_\+t bmp180\+Read\+Short (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address,  }\item[{uint8\+\_\+t $\ast$}]{errorcode }\end{DoxyParamCaption})}
+
+\mbox{\label{bmp180__lib_8h_aa1e612710538814b7529f1bc2b3b18d6}} 
+\index{bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}!bmp180\+Read\+Temp@{bmp180\+Read\+Temp}}
+\index{bmp180\+Read\+Temp@{bmp180\+Read\+Temp}!bmp180\+\_\+lib.\+h@{bmp180\+\_\+lib.\+h}}
+\subsubsection{bmp180\+Read\+Temp()}
+{\footnotesize\ttfamily int32\+\_\+t bmp180\+Read\+Temp (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{error\+\_\+code }\end{DoxyParamCaption})}
+

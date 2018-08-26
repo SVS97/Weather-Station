@@ -1,0 +1,437 @@
+\section{main.\+c File Reference}
+\label{main_8c}\index{main.\+c@{main.\+c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/sleep.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$util/delay.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$avr/pgmspace.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}lcd.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dht11.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dht22.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bmp180\+\_\+lib.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ F\+\_\+\+C\+PU}~16000000\+UL
+\begin{DoxyCompactList}\small\item\em Frequency C\+PU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ state} \{ \textbf{ I\+N\+\_\+\+M\+O\+DE} = 0, 
+\textbf{ O\+U\+T\+\_\+\+M\+O\+DE}, 
+\textbf{ P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+M\+O\+DE}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ switch\+\_\+state} (enum \textbf{ state} new\+\_\+state)
+\begin{DoxyCompactList}\small\item\em Change state information on the display. \end{DoxyCompactList}\item 
+\textbf{ I\+SR} (T\+I\+M\+E\+R1\+\_\+\+O\+V\+F\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em Interrupt for count seconds. \end{DoxyCompactList}\item 
+\textbf{ I\+SR} (I\+N\+T0\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em External interrupt for change mode. \end{DoxyCompactList}\item 
+void \textbf{ timer1\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Counting seconds initialize timer. \end{DoxyCompactList}\item 
+void \textbf{ external\+\_\+interrupt\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initializing external interrupts I\+N\+T0 on a falling edge for change mode. \end{DoxyCompactList}\item 
+void \textbf{ sleep\+\_\+ms} (uint16\+\_\+t ms\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Enables sleep mode to reduce power consumption. \end{DoxyCompactList}\item 
+void \textbf{ start\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Start initializing and setting for all devices (sensors, buttons, L\+CD) \end{DoxyCompactList}\item 
+void \textbf{ L\+C\+D\+\_\+display\+\_\+clock} ()
+\begin{DoxyCompactList}\small\item\em Display clock on the screen. \end{DoxyCompactList}\item 
+void \textbf{ setting\+\_\+btn\+\_\+clock} ()
+\begin{DoxyCompactList}\small\item\em Setting time by buttons. \end{DoxyCompactList}\item 
+void \textbf{ get\+\_\+sensors\+\_\+data} ()
+\begin{DoxyCompactList}\small\item\em Get data from all sensors every 30 seconds. \end{DoxyCompactList}\item 
+void \textbf{ L\+C\+D\+\_\+diaplay\+\_\+in} ()
+\begin{DoxyCompactList}\small\item\em Display time, temperature and humidity in door. \end{DoxyCompactList}\item 
+void \textbf{ L\+C\+D\+\_\+display\+\_\+out} ()
+\begin{DoxyCompactList}\small\item\em Display time, temperature and humidity out door. \end{DoxyCompactList}\item 
+void \textbf{ L\+C\+D\+\_\+diasplay\+\_\+pressure} ()
+\begin{DoxyCompactList}\small\item\em Display time, atmosphere pressure and altitude (height above sea level) in door. \end{DoxyCompactList}\item 
+int \textbf{ main} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile uint8\+\_\+t \textbf{ second}
+\item 
+volatile uint8\+\_\+t \textbf{ minute}
+\item 
+volatile uint8\+\_\+t \textbf{ hour}
+\item 
+char $\ast$ \textbf{ p\+Buf}
+\begin{DoxyCompactList}\small\item\em Buffer for L\+CD. \end{DoxyCompactList}\item 
+uint16\+\_\+t \textbf{ temperature11} = 0
+\begin{DoxyCompactList}\small\item\em Temperature from D\+H\+T11. \end{DoxyCompactList}\item 
+uint16\+\_\+t \textbf{ humidity11} = 0
+\begin{DoxyCompactList}\small\item\em Humidity from D\+H\+T22. \end{DoxyCompactList}\item 
+uint16\+\_\+t \textbf{ temperature22} = 0
+\begin{DoxyCompactList}\small\item\em Temperature from D\+H\+T22. \end{DoxyCompactList}\item 
+uint16\+\_\+t \textbf{ humidity22} = 0
+\begin{DoxyCompactList}\small\item\em Humidity from D\+H\+T22. \end{DoxyCompactList}\item 
+int32\+\_\+t \textbf{ temperature} = 0
+\begin{DoxyCompactList}\small\item\em Temperature from B\+M\+P180. \end{DoxyCompactList}\item 
+long \textbf{ pressure} = 0
+\begin{DoxyCompactList}\small\item\em Pressure from B\+M\+P180. \end{DoxyCompactList}\item 
+int16\+\_\+t \textbf{ B\+M\+P085\+\_\+calibration\+\_\+int16\+\_\+t} [8]
+\begin{DoxyCompactList}\small\item\em Calibration B\+M\+P180. \end{DoxyCompactList}\item 
+int16\+\_\+t \textbf{ B\+M\+P085\+\_\+calibration\+\_\+uint16\+\_\+t} [3]
+\begin{DoxyCompactList}\small\item\em Calibration B\+M\+P180. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ error\+\_\+code} =0
+\begin{DoxyCompactList}\small\item\em Error of B\+M\+P180. \end{DoxyCompactList}\item 
+long \textbf{ alt}
+\begin{DoxyCompactList}\small\item\em Altitude. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ clr} = 0
+\begin{DoxyCompactList}\small\item\em Counter for clear display. \end{DoxyCompactList}\item 
+enum \textbf{ state} \textbf{ state}
+\item 
+enum \textbf{ state} \textbf{ S\+T\+A\+TE} = \textbf{ I\+N\+\_\+\+M\+O\+DE}
+\begin{DoxyCompactList}\small\item\em Global state flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}} 
+\index{main.\+c@{main.\+c}!F\+\_\+\+C\+PU@{F\+\_\+\+C\+PU}}
+\index{F\+\_\+\+C\+PU@{F\+\_\+\+C\+PU}!main.\+c@{main.\+c}}
+\subsubsection{F\+\_\+\+C\+PU}
+{\footnotesize\ttfamily \#define F\+\_\+\+C\+PU~16000000\+UL}
+
+
+
+Frequency C\+PU. 
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\label{main_8c_adc6e5733fc3c22f0a7b2914188c49c90}} 
+\index{main.\+c@{main.\+c}!state@{state}}
+\index{state@{state}!main.\+c@{main.\+c}}
+\subsubsection{state}
+{\footnotesize\ttfamily enum \textbf{ state}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+\_\+\+M\+O\+DE@{I\+N\+\_\+\+M\+O\+DE}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!I\+N\+\_\+\+M\+O\+DE@{I\+N\+\_\+\+M\+O\+DE}}}\mbox{\label{main_8c_adc6e5733fc3c22f0a7b2914188c49c90a6c8d9ee1fbe0e9aefc3d1d000dc1220a}} 
+I\+N\+\_\+\+M\+O\+DE&In room data. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{O\+U\+T\+\_\+\+M\+O\+DE@{O\+U\+T\+\_\+\+M\+O\+DE}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!O\+U\+T\+\_\+\+M\+O\+DE@{O\+U\+T\+\_\+\+M\+O\+DE}}}\mbox{\label{main_8c_adc6e5733fc3c22f0a7b2914188c49c90aeea1c84623278569928bc010b7e4187d}} 
+O\+U\+T\+\_\+\+M\+O\+DE&Out room data. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+M\+O\+DE@{P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+M\+O\+DE}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+M\+O\+DE@{P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+M\+O\+DE}}}\mbox{\label{main_8c_adc6e5733fc3c22f0a7b2914188c49c90ac9c7364939bb9e0f5f1fa3d59ebdb06d}} 
+P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+M\+O\+DE&Pressure and altitude. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\label{main_8c_a17b35ef57f3f3d830a8d6a93ca214590}} 
+\index{main.\+c@{main.\+c}!external\+\_\+interrupt\+\_\+init@{external\+\_\+interrupt\+\_\+init}}
+\index{external\+\_\+interrupt\+\_\+init@{external\+\_\+interrupt\+\_\+init}!main.\+c@{main.\+c}}
+\subsubsection{external\+\_\+interrupt\+\_\+init()}
+{\footnotesize\ttfamily void external\+\_\+interrupt\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initializing external interrupts I\+N\+T0 on a falling edge for change mode. 
+
+\mbox{\label{main_8c_aba1abcad1a688918cd10ef294772b13b}} 
+\index{main.\+c@{main.\+c}!get\+\_\+sensors\+\_\+data@{get\+\_\+sensors\+\_\+data}}
+\index{get\+\_\+sensors\+\_\+data@{get\+\_\+sensors\+\_\+data}!main.\+c@{main.\+c}}
+\subsubsection{get\+\_\+sensors\+\_\+data()}
+{\footnotesize\ttfamily void get\+\_\+sensors\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get data from all sensors every 30 seconds. 
+
+\mbox{\label{main_8c_ab16889ae984b9b798989a0d239283cac}} 
+\index{main.\+c@{main.\+c}!I\+SR@{I\+SR}}
+\index{I\+SR@{I\+SR}!main.\+c@{main.\+c}}
+\subsubsection{I\+S\+R()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily I\+SR (\begin{DoxyParamCaption}\item[{T\+I\+M\+E\+R1\+\_\+\+O\+V\+F\+\_\+vect}]{ }\end{DoxyParamCaption})}
+
+
+
+Interrupt for count seconds. 
+
+\mbox{\label{main_8c_afea150fcd685610cb9f7672fce361e53}} 
+\index{main.\+c@{main.\+c}!I\+SR@{I\+SR}}
+\index{I\+SR@{I\+SR}!main.\+c@{main.\+c}}
+\subsubsection{I\+S\+R()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily I\+SR (\begin{DoxyParamCaption}\item[{I\+N\+T0\+\_\+vect}]{ }\end{DoxyParamCaption})}
+
+
+
+External interrupt for change mode. 
+
+\mbox{\label{main_8c_a19eec5f2cd52a46b15783f9f18e9e4c9}} 
+\index{main.\+c@{main.\+c}!L\+C\+D\+\_\+diaplay\+\_\+in@{L\+C\+D\+\_\+diaplay\+\_\+in}}
+\index{L\+C\+D\+\_\+diaplay\+\_\+in@{L\+C\+D\+\_\+diaplay\+\_\+in}!main.\+c@{main.\+c}}
+\subsubsection{L\+C\+D\+\_\+diaplay\+\_\+in()}
+{\footnotesize\ttfamily void L\+C\+D\+\_\+diaplay\+\_\+in (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Display time, temperature and humidity in door. 
+
+\mbox{\label{main_8c_a934668115c4afaab0461fb138c01c952}} 
+\index{main.\+c@{main.\+c}!L\+C\+D\+\_\+diasplay\+\_\+pressure@{L\+C\+D\+\_\+diasplay\+\_\+pressure}}
+\index{L\+C\+D\+\_\+diasplay\+\_\+pressure@{L\+C\+D\+\_\+diasplay\+\_\+pressure}!main.\+c@{main.\+c}}
+\subsubsection{L\+C\+D\+\_\+diasplay\+\_\+pressure()}
+{\footnotesize\ttfamily void L\+C\+D\+\_\+diasplay\+\_\+pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Display time, atmosphere pressure and altitude (height above sea level) in door. 
+
+\mbox{\label{main_8c_a9b09ed8735fa154235d8db7cc5c4af46}} 
+\index{main.\+c@{main.\+c}!L\+C\+D\+\_\+display\+\_\+clock@{L\+C\+D\+\_\+display\+\_\+clock}}
+\index{L\+C\+D\+\_\+display\+\_\+clock@{L\+C\+D\+\_\+display\+\_\+clock}!main.\+c@{main.\+c}}
+\subsubsection{L\+C\+D\+\_\+display\+\_\+clock()}
+{\footnotesize\ttfamily void L\+C\+D\+\_\+display\+\_\+clock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Display clock on the screen. 
+
+\mbox{\label{main_8c_a643de379960a0215cc077699e24e7638}} 
+\index{main.\+c@{main.\+c}!L\+C\+D\+\_\+display\+\_\+out@{L\+C\+D\+\_\+display\+\_\+out}}
+\index{L\+C\+D\+\_\+display\+\_\+out@{L\+C\+D\+\_\+display\+\_\+out}!main.\+c@{main.\+c}}
+\subsubsection{L\+C\+D\+\_\+display\+\_\+out()}
+{\footnotesize\ttfamily void L\+C\+D\+\_\+display\+\_\+out (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Display time, temperature and humidity out door. 
+
+\mbox{\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.\+c@{main.\+c}!main@{main}}
+\index{main@{main}!main.\+c@{main.\+c}}
+\subsubsection{main()}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{main_8c_a685d2aedb9c7384e404ba001e0f193af}} 
+\index{main.\+c@{main.\+c}!setting\+\_\+btn\+\_\+clock@{setting\+\_\+btn\+\_\+clock}}
+\index{setting\+\_\+btn\+\_\+clock@{setting\+\_\+btn\+\_\+clock}!main.\+c@{main.\+c}}
+\subsubsection{setting\+\_\+btn\+\_\+clock()}
+{\footnotesize\ttfamily void setting\+\_\+btn\+\_\+clock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setting time by buttons. 
+
+\mbox{\label{main_8c_a655422e1c9d3a81a192c3aac9e34c1f9}} 
+\index{main.\+c@{main.\+c}!sleep\+\_\+ms@{sleep\+\_\+ms}}
+\index{sleep\+\_\+ms@{sleep\+\_\+ms}!main.\+c@{main.\+c}}
+\subsubsection{sleep\+\_\+ms()}
+{\footnotesize\ttfamily void sleep\+\_\+ms (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{ms\+\_\+val }\end{DoxyParamCaption})}
+
+
+
+Enables sleep mode to reduce power consumption. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ms\+\_\+val} & \+: sleep time in milliseconds \\
+\hline
+\end{DoxyParams}
+\mbox{\label{main_8c_ac53933fe2f1dae541f29b07fdbdd48d1}} 
+\index{main.\+c@{main.\+c}!start\+\_\+init@{start\+\_\+init}}
+\index{start\+\_\+init@{start\+\_\+init}!main.\+c@{main.\+c}}
+\subsubsection{start\+\_\+init()}
+{\footnotesize\ttfamily void start\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start initializing and setting for all devices (sensors, buttons, L\+CD) 
+
+\mbox{\label{main_8c_a8374bc374290950e43f07ed443108f9f}} 
+\index{main.\+c@{main.\+c}!switch\+\_\+state@{switch\+\_\+state}}
+\index{switch\+\_\+state@{switch\+\_\+state}!main.\+c@{main.\+c}}
+\subsubsection{switch\+\_\+state()}
+{\footnotesize\ttfamily void switch\+\_\+state (\begin{DoxyParamCaption}\item[{enum \textbf{ state}}]{new\+\_\+state }\end{DoxyParamCaption})}
+
+
+
+Change state information on the display. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em new\+\_\+state} & \+: current state of information \\
+\hline
+\end{DoxyParams}
+\mbox{\label{main_8c_abb302081b7dbd40d0fea4bbe53fd9b7b}} 
+\index{main.\+c@{main.\+c}!timer1\+\_\+init@{timer1\+\_\+init}}
+\index{timer1\+\_\+init@{timer1\+\_\+init}!main.\+c@{main.\+c}}
+\subsubsection{timer1\+\_\+init()}
+{\footnotesize\ttfamily void timer1\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Counting seconds initialize timer. 
+
+
+
+\subsection{Variable Documentation}
+\mbox{\label{main_8c_a3a4c627bf898e6ac1181089dde7282e1}} 
+\index{main.\+c@{main.\+c}!alt@{alt}}
+\index{alt@{alt}!main.\+c@{main.\+c}}
+\subsubsection{alt}
+{\footnotesize\ttfamily long alt}
+
+
+
+Altitude. 
+
+\mbox{\label{main_8c_a76dcaf14063e5fa43778c147b0af16fd}} 
+\index{main.\+c@{main.\+c}!B\+M\+P085\+\_\+calibration\+\_\+int16\+\_\+t@{B\+M\+P085\+\_\+calibration\+\_\+int16\+\_\+t}}
+\index{B\+M\+P085\+\_\+calibration\+\_\+int16\+\_\+t@{B\+M\+P085\+\_\+calibration\+\_\+int16\+\_\+t}!main.\+c@{main.\+c}}
+\subsubsection{B\+M\+P085\+\_\+calibration\+\_\+int16\+\_\+t}
+{\footnotesize\ttfamily int16\+\_\+t B\+M\+P085\+\_\+calibration\+\_\+int16\+\_\+t[8]}
+
+
+
+Calibration B\+M\+P180. 
+
+\mbox{\label{main_8c_ad98706c73390ba42202384e01dd4945f}} 
+\index{main.\+c@{main.\+c}!B\+M\+P085\+\_\+calibration\+\_\+uint16\+\_\+t@{B\+M\+P085\+\_\+calibration\+\_\+uint16\+\_\+t}}
+\index{B\+M\+P085\+\_\+calibration\+\_\+uint16\+\_\+t@{B\+M\+P085\+\_\+calibration\+\_\+uint16\+\_\+t}!main.\+c@{main.\+c}}
+\subsubsection{B\+M\+P085\+\_\+calibration\+\_\+uint16\+\_\+t}
+{\footnotesize\ttfamily int16\+\_\+t B\+M\+P085\+\_\+calibration\+\_\+uint16\+\_\+t[3]}
+
+
+
+Calibration B\+M\+P180. 
+
+\mbox{\label{main_8c_a365a3aef8e15a0be5468a0dc85bbc94b}} 
+\index{main.\+c@{main.\+c}!clr@{clr}}
+\index{clr@{clr}!main.\+c@{main.\+c}}
+\subsubsection{clr}
+{\footnotesize\ttfamily uint8\+\_\+t clr = 0}
+
+
+
+Counter for clear display. 
+
+\mbox{\label{main_8c_a45998c0b4dd5717ced32282d45d4ef9b}} 
+\index{main.\+c@{main.\+c}!error\+\_\+code@{error\+\_\+code}}
+\index{error\+\_\+code@{error\+\_\+code}!main.\+c@{main.\+c}}
+\subsubsection{error\+\_\+code}
+{\footnotesize\ttfamily uint8\+\_\+t error\+\_\+code =0}
+
+
+
+Error of B\+M\+P180. 
+
+\mbox{\label{main_8c_a906516b3d65fd10d5c2660092142bca9}} 
+\index{main.\+c@{main.\+c}!hour@{hour}}
+\index{hour@{hour}!main.\+c@{main.\+c}}
+\subsubsection{hour}
+{\footnotesize\ttfamily volatile uint8\+\_\+t hour}
+
+\mbox{\label{main_8c_a6163a2874f30b4ddb9261bc58fd0e8ee}} 
+\index{main.\+c@{main.\+c}!humidity11@{humidity11}}
+\index{humidity11@{humidity11}!main.\+c@{main.\+c}}
+\subsubsection{humidity11}
+{\footnotesize\ttfamily uint16\+\_\+t humidity11 = 0}
+
+
+
+Humidity from D\+H\+T22. 
+
+\mbox{\label{main_8c_a239db18bf5ac595e5013d5ee730cb88e}} 
+\index{main.\+c@{main.\+c}!humidity22@{humidity22}}
+\index{humidity22@{humidity22}!main.\+c@{main.\+c}}
+\subsubsection{humidity22}
+{\footnotesize\ttfamily uint16\+\_\+t humidity22 = 0}
+
+
+
+Humidity from D\+H\+T22. 
+
+\mbox{\label{main_8c_ac0123c58393eaaf0c66523ef57e841c4}} 
+\index{main.\+c@{main.\+c}!minute@{minute}}
+\index{minute@{minute}!main.\+c@{main.\+c}}
+\subsubsection{minute}
+{\footnotesize\ttfamily volatile uint8\+\_\+t minute}
+
+\mbox{\label{main_8c_a4edb4000a60dd3423af0d876ed4821e1}} 
+\index{main.\+c@{main.\+c}!p\+Buf@{p\+Buf}}
+\index{p\+Buf@{p\+Buf}!main.\+c@{main.\+c}}
+\subsubsection{p\+Buf}
+{\footnotesize\ttfamily char$\ast$ p\+Buf}
+
+
+
+Buffer for L\+CD. 
+
+\mbox{\label{main_8c_aca0d7b5328c3217ea6dfb2586c3723b8}} 
+\index{main.\+c@{main.\+c}!pressure@{pressure}}
+\index{pressure@{pressure}!main.\+c@{main.\+c}}
+\subsubsection{pressure}
+{\footnotesize\ttfamily long pressure = 0}
+
+
+
+Pressure from B\+M\+P180. 
+
+\mbox{\label{main_8c_ae435761e09258eb177601c58bb79cbbc}} 
+\index{main.\+c@{main.\+c}!second@{second}}
+\index{second@{second}!main.\+c@{main.\+c}}
+\subsubsection{second}
+{\footnotesize\ttfamily volatile uint8\+\_\+t second}
+
+\mbox{\label{main_8c_a003a9e0d98ce4b48357544cd0752a2f4}} 
+\index{main.\+c@{main.\+c}!S\+T\+A\+TE@{S\+T\+A\+TE}}
+\index{S\+T\+A\+TE@{S\+T\+A\+TE}!main.\+c@{main.\+c}}
+\subsubsection{S\+T\+A\+TE}
+{\footnotesize\ttfamily enum \textbf{ state} S\+T\+A\+TE = \textbf{ I\+N\+\_\+\+M\+O\+DE}}
+
+
+
+Global state flag. 
+
+\mbox{\label{main_8c_a72ac9d72742b75aa714400ece4c1d4ec}} 
+\index{main.\+c@{main.\+c}!state@{state}}
+\index{state@{state}!main.\+c@{main.\+c}}
+\subsubsection{state}
+{\footnotesize\ttfamily enum \textbf{ state}  \textbf{ state}}
+
+\mbox{\label{main_8c_a015ae21dbf3e9d5aa583088391fd61ee}} 
+\index{main.\+c@{main.\+c}!temperature@{temperature}}
+\index{temperature@{temperature}!main.\+c@{main.\+c}}
+\subsubsection{temperature}
+{\footnotesize\ttfamily int32\+\_\+t temperature = 0}
+
+
+
+Temperature from B\+M\+P180. 
+
+\mbox{\label{main_8c_ab4de520f79a41c88d1a612ba677a452f}} 
+\index{main.\+c@{main.\+c}!temperature11@{temperature11}}
+\index{temperature11@{temperature11}!main.\+c@{main.\+c}}
+\subsubsection{temperature11}
+{\footnotesize\ttfamily uint16\+\_\+t temperature11 = 0}
+
+
+
+Temperature from D\+H\+T11. 
+
+\mbox{\label{main_8c_ab0ad7bfc871f103f70eb9d1901b7db07}} 
+\index{main.\+c@{main.\+c}!temperature22@{temperature22}}
+\index{temperature22@{temperature22}!main.\+c@{main.\+c}}
+\subsubsection{temperature22}
+{\footnotesize\ttfamily uint16\+\_\+t temperature22 = 0}
+
+
+
+Temperature from D\+H\+T22. 
+

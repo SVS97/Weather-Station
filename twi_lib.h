@@ -43,11 +43,11 @@ void i2cSendByte(unsigned char data);
 void i2cReceiveByteACK(void);
 //! Receive a data byte over I2C  
 void i2cReceiveByteNACK(void);
-// get received byte back
+//! get received byte back
 uint8_t i2cGetReceivedByte(void);
 //! Wait for current I2C operation to complete
 uint8_t i2cWaitForComplete(void);
-// Check for expected error code
+//! Check for expected error code
 uint8_t checki2cReturnCode(uint8_t expected_return_code);
 //#################################################################################
 //#################################################################################
