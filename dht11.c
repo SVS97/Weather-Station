@@ -1,7 +1,7 @@
 /* Library for termo-sensor DHT 11 */
 #include "dht11.h"
 #include <avr/interrupt.h>
-uint8_t c=0;	///< Temp
+uint8_t c = 0;	///< Temp
 
 /**
 \brief Micro controller send start pulse/request	
@@ -33,7 +33,7 @@ void Response11()
 
 	for (wait = 80; wait > 0 ; wait--) {
 		_delay_us(1);
-		if ((DHT11_PIN & (1 << DHT11_BIT)) ==0)
+		if ((DHT11_PIN & (1 << DHT11_BIT)) == 0)
 			break;
 	}
 }

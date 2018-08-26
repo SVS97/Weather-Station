@@ -46,34 +46,34 @@
 #if 1
 /* Custom functions, which used in the program 	*/
                    
-void LCDGotoXY(uint8_t,uint8_t);						/* Set cursor to X, Y position 							*/
-void LCDdata(uint8_t);								/* Display 1 character 								*/
-void LCDdataXY(uint8_t,uint8_t,uint8_t);					/* Display 1 character in the display in the X, Y position 			*/
-void LCDsendString(char*);							/* Display the string								*/
-void LCDstringXY(char*,uint8_t,uint8_t);					/* Display the string at position x, y						*/
-void LCDstring_of_sramXY(uint8_t*,uint8_t,uint8_t);				/* Display the string at position x, y from RAM					*/
-void LCDstring_of_flashXY(const uint8_t*,uint8_t, uint8_t);			/* Display the string to the position x, y from the flash 			*/
-void LCDinit(void);								/* Initializing the LCD 							*/
-void LCDblank(void);								/* Make invisible information on the display 					*/
-void LCDnblank(void);								/* Make visible information in the display + turn off the visible cursors	*/
-void LCDclear(void);								/* Clear the display from info + cursor to position 0,0				*/
-void LCDcursor_bl(void);							/* Enable the flashing cursor							*/
-void LCDcursor_on(void);							/* Enable underline cursor 							*/
-void LCDcursor_vi(void);							/* Enable both cursors								*/
-void LCDcursorOFF(void);							/* Disable the cursor (any)							*/
-void LCDacr(void);								/* AC address counter will always be shifted to n + 1				*/
-void LCDacl(void);								/* AC address counter will always be shifted to n-1				*/
-void LCDcursorl(void);								/* Move the cursor to the left by 1 character					*/
-void LCDcursorr(void);								/* Move the cursor to the right by 1 character					*/
-void LCDcursorln(uint8_t);							/* Move the cursor to the left with n characters				*/
-void LCDcursorrn(uint8_t);							/* Move the cursor to the right by n characters					*/
-void LCDscreenl(void);								/* Move the screen to the left by 1 character					*/
-void LCDscreenr(void);								/* Move the screen to the right by 1 character					*/
-void LCDscreenln(uint8_t);							/* Move the screen to the left by n characters					*/
-void LCDscreenrn(uint8_t);							/* Move the screen to the right by n characters					*/
-void LCDscreenL(void);								/* With each new character, the screen will shift to the left			*/
-void LCDscreenR(void);								/* With each new character, the screen will shift to the right 			*/
-void LCDresshift(void);								/* Cursor to position 0.0 + reset all shifts, the image remains			*/
+void LCDGotoXY(uint8_t,uint8_t);					/* Set cursor to X, Y position 							*/
+void LCDdata(uint8_t);							/* Display 1 character 								*/
+void LCDdataXY(uint8_t,uint8_t,uint8_t);				/* Display 1 character in the display in the X, Y position 			*/
+void LCDsendString(char*);						/* Display the string								*/
+void LCDstringXY(char*,uint8_t,uint8_t);				/* Display the string at position x, y						*/
+void LCDstring_of_sramXY(uint8_t*,uint8_t,uint8_t);			/* Display the string at position x, y from RAM					*/
+void LCDstring_of_flashXY(const uint8_t*,uint8_t, uint8_t);		/* Display the string to the position x, y from the flash 			*/
+void LCDinit(void);							/* Initializing the LCD 							*/
+void LCDblank(void);							/* Make invisible information on the display 					*/
+void LCDnblank(void);							/* Make visible information in the display + turn off the visible cursors	*/
+void LCDclear(void);							/* Clear the display from info + cursor to position 0,0				*/
+void LCDcursor_bl(void);						/* Enable the flashing cursor							*/
+void LCDcursor_on(void);						/* Enable underline cursor 							*/
+void LCDcursor_vi(void);						/* Enable both cursors								*/
+void LCDcursorOFF(void);						/* Disable the cursor (any)							*/
+void LCDacr(void);							/* AC address counter will always be shifted to n + 1				*/
+void LCDacl(void);							/* AC address counter will always be shifted to n-1				*/
+void LCDcursorl(void);							/* Move the cursor to the left by 1 character					*/
+void LCDcursorr(void);							/* Move the cursor to the right by 1 character					*/
+void LCDcursorln(uint8_t);						/* Move the cursor to the left with n characters				*/
+void LCDcursorrn(uint8_t);						/* Move the cursor to the right by n characters					*/
+void LCDscreenl(void);							/* Move the screen to the left by 1 character					*/
+void LCDscreenr(void);							/* Move the screen to the right by 1 character					*/
+void LCDscreenln(uint8_t);						/* Move the screen to the left by n characters					*/
+void LCDscreenrn(uint8_t);						/* Move the screen to the right by n characters					*/
+void LCDscreenL(void);							/* With each new character, the screen will shift to the left			*/
+void LCDscreenR(void);							/* With each new character, the screen will shift to the right 			*/
+void LCDresshift(void);							/* Cursor to position 0.0 + reset all shifts, the image remains			*/
 
 
 /* Two-line display */

@@ -34,19 +34,19 @@ static const unsigned char PROGMEM convert_HD44780[64] =
 
 //Custom functions for LCD, we use them in the program
 #if 1
-void LCDdata(uint8_t i)						/* Sending a symbol for display					*/
+void LCDdata(uint8_t i)					/* Sending a symbol for display					*/
 {
-	Busy_flag();						/* Ñheck first the employment flag				*/
-	CPORT|=(1<<RS);						/* RS = 1 send data to the LCD 					*/
+	Busy_flag();					/* Ñheck first the employment flag				*/
+	CPORT|=(1<<RS);					/* RS = 1 send data to the LCD 					*/
 	Send_byte(lcd_rus(i));
-	CPORT&=~(1<<RS);					/* RS=0 							*/
+	CPORT&=~(1<<RS);				/* RS=0 							*/
 }
-void LCDdataXY (uint8_t a, uint8_t b,uint8_t c)			/* Display 1 character in the display in the X, Y position	*/
+void LCDdataXY (uint8_t a, uint8_t b,uint8_t c)		/* Display 1 character in the display in the X, Y position	*/
 {
 	LCDGotoXY(b,c);
 	LCDdata(a);
 }
-void LCDGotoXY(uint8_t x,uint8_t y)				/* Set cursor to X, Y position 					*/
+void LCDGotoXY(uint8_t x,uint8_t y)			/* Set cursor to X, Y position 					*/
 {
 	 uint8_t Address;
 	
@@ -61,7 +61,7 @@ void LCDGotoXY(uint8_t x,uint8_t y)				/* Set cursor to X, Y position 					*/
 	
 	LCDcommand(1<<7 | Address);
 }
-void LCDstringXY(char *i,uint8_t x,uint8_t y) 			/* Display a line in the display X, Y				*/
+void LCDstringXY(char *i,uint8_t x,uint8_t y) 		/* Display a line in the display X, Y				*/
 {
 	LCDGotoXY(x,y);
 	while( *i )
@@ -69,7 +69,7 @@ void LCDstringXY(char *i,uint8_t x,uint8_t y) 			/* Display a line in the displa
 		LCDdata(*i++ );
 	}
 }
-void LCDsendString(char *s)					/* Display the line in the display 				*/
+void LCDsendString(char *s)				/* Display the line in the display 				*/
 {
 	while( *s )
 	{
@@ -103,7 +103,7 @@ void LCDstring_of_flashXY(const uint8_t *FlashLoc,uint8_t x,uint8_t y)
 }
 void LCDinit(void)							/* Initializing the display					*/
 {
-	/* Before initializing the LCD, it is necessary to initiate a delay of 100 msec in the init, so that the power is set	*/
+	/* Before initializing the LCD, it is necessary to initiate a delay of 100 msec in the init, so that the power is set		*/
 	_delay_ms(100);
 	CDDR |=  (1<<RS)|(1<<E)|(1<<RW);   				/* Configuring Ports						*/ 
 	CPORT&=~((1<<RS)|(1<<E)|(1<<RW));  				/* Configuring Ports 						*/ 
@@ -394,7 +394,7 @@ static void Busy_flag(void)		   			 /* Checking Busy flag			*/
 	
 	CPORT&=~(1<<RW);   							/* R/W=0 					*/
 }
-static void HiPin(void)			    					/* Translate the port into the Hi state		*/
+static void HiPin(void)								/* Translate the port into the Hi state		*/
 {
 	#ifdef  LCD_8BIT
 			DDDR =0;
@@ -414,7 +414,7 @@ static void OutPin(void)							/* Translate the port to the output state	*/
 			DPORT&=~((1<<DB7)|(1<<DB6)|(1<<DB5)|(1<<DB4));
 	#endif
 }
-static void InPin(void)			   					 /*We translate the port to the input state 	*/
+static void InPin(void)								/* Translate the port to the input state 	*/
 {
 	#ifdef  LCD_8BIT
 			DDDR =0;

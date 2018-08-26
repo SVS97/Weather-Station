@@ -14,7 +14,7 @@
 #define F_CPU 16000000UL
 
 //----------------------------------------
-#define OSS 3								///< Accuracy mode
+#define OSS 3							///< Accuracy mode
 //----------------------------------------
 
 #define BMP180_R 0xEF						///< Read from sensor

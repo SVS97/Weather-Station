@@ -9,10 +9,13 @@
  * This code developed for education aims, not for commercial using.
  * It's a graduation project GL C/Embedded BaseCamp
  * \section desc Description
- * Weather station consist of two temperature and humidity sensors (DHT11 indoor, DHT22 outdoor), one barometer (BMP180 I2C) LCD display (1602A) and micro controller Arduino Uno.
- * Code writing without using Arduino libraries (BARE METAL AVR). Sensors interrogated every 30 seconds. States of display information changes every 30 seconds and with button help.
+ * Weather station consist of two temperature and humidity sensors (DHT11 indoor, DHT22 outdoor), one barometer (BMP180 I2C) 
+ * LCD display (1602A) and micro controller Arduino Uno.
+ * Code writing without using Arduino libraries (BARE METAL AVR). Sensors interrogated every 30 seconds. States of display 
+ * information changes every 30 seconds and with button help.
  * Also weather station show current time (not accurate), time settings by button.
- * A (very) simple weather station written in C for training purposes. The code is written for the purpose of acquaintance with timers, interrupts, buttons, display and different sensors.
+ * A (very) simple weather station written in C for training purposes. The code is written for the purpose of acquaintance 
+* with timers, interrupts, buttons, display and different sensors.
  * Seconds are counted in the interrupt timer. The time setting is done using two buttons.  Thanks for helping @thodnev.
  * \section compile_sec Compilation
  * Project compiles with Makefile help (make all). 
@@ -21,7 +24,7 @@
 */
 
 
-#define F_CPU 16000000UL		///< Frequency CPU 
+#define F_CPU 16000000UL					///< Frequency CPU 
 #include <avr/io.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
@@ -57,7 +60,7 @@ uint8_t clr = 0;						///< Counter for clear display
 
 const enum state {						// State of indication		
 	IN_MODE = 0,						///< In room data
-	OUT_MODE,							///< Out room data
+	OUT_MODE,						///< Out room data
 	PRESSURE_MODE,						///< Pressure and altitude
 } state;
 volatile enum state STATE = IN_MODE;				///< Global state flag		
@@ -124,27 +127,27 @@ void external_interrupt_init(void)
 */
 void sleep_ms(uint16_t ms_val)
 {
-	set_sleep_mode(SLEEP_MODE_IDLE);				/* Idle Mode, allows timer 1 to work			*/
-	cli();								/* Disable interrupts -- as memory barrier 		*/
-	sleep_enable();							/* Set SE (sleep enable bit) 				*/
-	sei();  							/* Enable interrupts				 	*/
+	set_sleep_mode(SLEEP_MODE_IDLE);				/* Idle Mode, allows timer 1 to work		*/
+	cli();								/* Disable interrupts -- as memory barrier 	*/
+	sleep_enable();							/* Set SE (sleep enable bit) 			*/
+	sei();  							/* Enable interrupts				*/
 	while (ms_val--) {
-		sleep_cpu();						/* Put MCU to sleep 					*/
-									/* This is executed after wakeup 			*/
-									/* We Will Wake Up In ISR(TIMER1_COMPA_vect, ISR_BLOCK) */
+		sleep_cpu();						/* Put MCU to sleep 				*/
+									/* This is executed after wakeup 		*/
+									/* Wake Up In ISR(TIMER1_COMPA_vect, ISR_BLOCK) */
 	}
-	sleep_disable();						/* Disable sleeps for safety */
+	sleep_disable();						/* Disable sleeps for safety 			*/
 }
 
-void start_init();							/* Initializing all devices 				*/
-void LCD_display_clock();						/* Displaying hours					*/
-void setting_btn_clock();						/* Clock setting by button				*/
-void get_sensors_data();						/* Get data from sensors				*/
-void LCD_diaplay_in();							/* Displaying in data					*/
-void LCD_display_out();							/* Displaying out data					*/
-void LCD_diasplay_pressure();						/* Displaying pressure					*/
+void start_init();							/* Initializing all devices 			*/
+void LCD_display_clock();						/* Displaying hours				*/
+void setting_btn_clock();						/* Clock setting by button			*/
+void get_sensors_data();						/* Get data from sensors			*/
+void LCD_diaplay_in();							/* Displaying in data				*/
+void LCD_display_out();							/* Displaying out data				*/
+void LCD_diasplay_pressure();						/* Displaying pressure				*/
 
-
+			/* MAIN BEGIN */
 int main(void)
 {
 	start_init();
@@ -174,35 +177,37 @@ int main(void)
 	}
 }
 
+			/* MAIN END */
+
 /// Start initializing and setting for all devices (sensors, buttons, LCD)
 void start_init()
 {
 	second = 0;							/* Setting start value for time		*/
-	minute = 0;							/*						*/
-	hour = 0;							/*						*/
+	minute = 0;							/*					*/
+	hour = 0;							/*					*/
 
-	LCDinit();							/* Initializing LCD Display			*/
-	pBuf = BCD_GetPointerBuf();					/* Initializing LCD Buffer 			*/
+	LCDinit();							/* Initializing LCD Display		*/
+	pBuf = BCD_GetPointerBuf();					/* Initializing LCD Buffer 		*/
 
-	timer1_init();							/* Timer  for seconds initialization*/
+	timer1_init();							/* Timer  for seconds initialization	*/
 
-	DDRC |= (0 << 0) | (0 << 1);					/* Setting clock buttons			*/
-	PORTC |= (1 << 0) | (1 << 1);					/*						*/
+	DDRC |= (0 << 0) | (0 << 1);					/* Setting clock buttons		*/
+	PORTC |= (1 << 0) | (1 << 1);					/*					*/
 	
-	DDRD |= (0 << 2);						/* Setting external interrupts buttons		*/
-	PORTD |= (1 << 2);						/*						*/
+	DDRD |= (0 << 2);						/* Setting external interrupts buttons	*/
+	PORTD |= (1 << 2);						/*					*/
 
-	external_interrupt_init();					/* External interrupt initializing		*/
+	external_interrupt_init();					/* External interrupt initializing	*/
 
 	/*Initialize BMP085*/
 	BMP180_Calibration(BMP085_calibration_int16_t, BMP085_calibration_uint16_t,&error_code);
 	
-	char text1[] = " Weather";				/* Start text					*/
-	char text2[] = "station";				/*						*/
-	uint8_t i = 0;							/* Counter for start text			*/
+	char text1[] = " Weather";					/* Start text				*/
+	char text2[] = "station";					/*					*/
+	uint8_t i = 0;							/* Counter for start text		*/
 	
 	while(i<13){
-		LCDstringXY(text1, 12,0);				/* Start text					*/
+		LCDstringXY(text1, 12,0);				/* Start text				*/
 		LCDstringXY(text2, 16,1);
 		_delay_ms(200);
 		LCDscreenl();
@@ -210,18 +215,18 @@ void start_init()
 	}
 	sleep_ms(2);
 	
-	getdht11(&temperature11, &humidity11);				/* Getting information from sensors */
+	getdht11(&temperature11, &humidity11);				/* Getting information from sensors 	*/
 	getdht22(&temperature22, &humidity22);
 	bmp180Convert(BMP085_calibration_int16_t, BMP085_calibration_uint16_t,&temperature, &pressure,&error_code);
 	alt = bmp180CalcAltitude(pressure);
-	pressure = pressure / 133.3224 + 120;				/* Translation into mmHg			*/
+	pressure = pressure / 133.3224 + 120;				/* Translation into mmHg		*/
 }
 
 /// Display clock on the screen
 void LCD_display_clock()
 {
 	BCD_2(hour);
-	LCDstringXY(pBuf, 3, 0);					/* Clocks on display				*/
+	LCDstringXY(pBuf, 3, 0);					/* Clocks on display			*/
 	BCD_2(minute);
 	LCDstringXY(pBuf, 6, 0);
 	BCD_2(second);
@@ -233,7 +238,7 @@ void LCD_display_clock()
 /// Setting time by buttons
 void setting_btn_clock()
 {
-		if ((PINC & (1 << 0)) == (0 << 0)){			/* Setting hours manually			 */
+		if ((PINC & (1 << 0)) == (0 << 0)){			/* Setting hours manually		 */
 			_delay_ms(100);
 			if ((PINC & (1 << 0)) == (0 << 0))
 			hour++;
@@ -241,7 +246,7 @@ void setting_btn_clock()
 			hour = 0;
 		}
 		
-		if ((PINC & (1 << 1)) == (0 << 1)){			/* Setting minutes manually			 */
+		if ((PINC & (1 << 1)) == (0 << 1)){			/* Setting minutes manually		 */
 			_delay_ms(100);
 			if ((PINC & (1 << 1)) == (0 << 1))
 			minute++;
