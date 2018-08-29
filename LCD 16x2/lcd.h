@@ -76,7 +76,7 @@ void LCDscreenln(uint8_t);						/* Move the screen to the left by n characters		
 void LCDscreenrn(uint8_t);						/* Move the screen to the right by n characters					*/
 void LCDscreenL(void);							/* With each new character, the screen will shift to the left			*/
 void LCDscreenR(void);							/* With each new character, the screen will shift to the right 			*/
-void LCDresshift(void);							/* Cursor to position 0.0 + reset all shifts, the image remains			*/
+void LCDresshift(void);						/* Cursor to position 0.0 + reset all shifts, the image remains			*/
 
 
 /* Two-line display */
