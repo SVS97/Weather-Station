@@ -1,6 +1,11 @@
-//#################################################################################
+
 //	Library to use BMP180 with ATMEL Atmega family
-//#################################################################################
+
+/**
+ * © Copyrighted from http://www.avislab.com/blog/bmp180/
+ * Thanks for help Avislab
+*/
+
 
 #include "bmp180_lib.h"
 #include "twi_lib.h"

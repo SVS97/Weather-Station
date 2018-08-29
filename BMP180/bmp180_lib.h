@@ -1,6 +1,9 @@
-//#################################################################################
 //	Library to use BMP180 with ATMEL Atmega family
-//#################################################################################
+
+/**
+ * © Copyrighted from http://www.avislab.com/blog/bmp180/
+ * Thanks for help Avislab
+*/
 
 #ifndef _ATMEGA_BMP180_LIB_H_
 #define _ATMEGA_BMP180_LIB_H_
@@ -13,9 +16,9 @@
 
 #define F_CPU 16000000UL
 
-//----------------------------------------
+
 #define OSS 3							///< Accuracy mode
-//----------------------------------------
+
 
 #define BMP180_R 0xEF						///< Read from sensor
 #define BMP180_W 0xEE						///< Write to sensor

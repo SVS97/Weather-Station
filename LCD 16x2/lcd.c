@@ -1,4 +1,7 @@
-
+/**
+ * © Copyrighted from http://we.easyelectronics.ru/lcd_gfx/dopilka-biblioteki-dlya-lcd-na-baze-hd44780.html
+ * Thanks for help Papandopala
+*/
  
 #include "define.h"  
 #include "lcd.h"   

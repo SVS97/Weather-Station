@@ -1,5 +1,8 @@
-
-/* Type of MCU:			Atmega16, Flash 16 Kbytes, SRAM 1 Kbytes, EEPROM 512 bytes.
+/**
+ * © Copyrighted from http://we.easyelectronics.ru/lcd_gfx/dopilka-biblioteki-dlya-lcd-na-baze-hd44780.html
+ * Thanks for help Papandopala
+ * 
+ * Type of MCU:			Atmega328p.
  * Description:         	A trimmed library for working with LCD displays based on HD44780
 				controllers. This library operates on a 4-bit and 8-bit connection scheme
 				LCD, supports only display data*/
