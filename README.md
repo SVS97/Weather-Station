@@ -7,3 +7,5 @@ Project compiles with Makefile help (make all)
 ### Prototype Example
 ![Example](https://github.com/SVS97/Weather-Station/blob/master/Prototype.jpg)
 
+More information you can get [here](https://youtu.be/kRKrBm3IeBc)
+
