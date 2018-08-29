@@ -144,7 +144,7 @@ void LCD_display_clock();						/* Displaying hours				*/
 void setting_btn_clock();						/* Clock setting by button			*/
 void get_sensors_data();						/* Get data from sensors			*/
 void LCD_diaplay_in();							/* Displaying in data				*/
-void LCD_display_out();							/* Displaying out data				*/
+void LCD_display_out();							/* Displaying out data				*/ 
 void LCD_diasplay_pressure();						/* Displaying pressure				*/
 
 			/* MAIN BEGIN */
